@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicR8r.Web", "MusicR8r\MusicR8r.Web.csproj", "{C387CEA4-66F2-4292-AD2A-9934F7B64A5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{5FEBD7E6-0C91-48A1-B5DD-319E20FC92C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicR8r.Data", "MusicR8r.Data\MusicR8r.Data.csproj", "{58B4E5E9-AB95-4643-B4DE-9827AD542D6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicR8r.Data.Model", "MusicR8r.Data.Model\MusicR8r.Data.Model.csproj", "{C79F1C3F-DB76-4E3F-84E9-D41DD8D2E860}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{36282884-0653-47E2-B656-2846F66AD947}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7DE2A069-2FFA-4044-AB4A-D09256460276}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C387CEA4-66F2-4292-AD2A-9934F7B64A5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C387CEA4-66F2-4292-AD2A-9934F7B64A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C387CEA4-66F2-4292-AD2A-9934F7B64A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C387CEA4-66F2-4292-AD2A-9934F7B64A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58B4E5E9-AB95-4643-B4DE-9827AD542D6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58B4E5E9-AB95-4643-B4DE-9827AD542D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58B4E5E9-AB95-4643-B4DE-9827AD542D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58B4E5E9-AB95-4643-B4DE-9827AD542D6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C79F1C3F-DB76-4E3F-84E9-D41DD8D2E860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C79F1C3F-DB76-4E3F-84E9-D41DD8D2E860}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C79F1C3F-DB76-4E3F-84E9-D41DD8D2E860}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C79F1C3F-DB76-4E3F-84E9-D41DD8D2E860}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{58B4E5E9-AB95-4643-B4DE-9827AD542D6C} = {5FEBD7E6-0C91-48A1-B5DD-319E20FC92C1}
+		{C79F1C3F-DB76-4E3F-84E9-D41DD8D2E860} = {5FEBD7E6-0C91-48A1-B5DD-319E20FC92C1}
+	EndGlobalSection
+EndGlobal
