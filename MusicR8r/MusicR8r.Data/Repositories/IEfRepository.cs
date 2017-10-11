@@ -5,6 +5,7 @@ namespace MusicR8r.Data.Repositories
 {
     public interface IEfRepository<T> where T : class, IDeletable
     {
+        T GetById(object id);
         IQueryable<T> All { get; }
         IQueryable<T> AllAndDeleted { get; }
 

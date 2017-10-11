@@ -10,24 +10,28 @@ namespace MusicR8r.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Ninject.Extensions.Conventions;
     using System.Data.Entity;
     using MusicR8r.Data;
     using MusicR8r.Data.Repositories;
+    using MusicR8r.Services.Contracts;
+    using MusicR8r.Data.SaveContext;
+    using AutoMapper;
 
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -35,7 +39,7 @@ namespace MusicR8r.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -64,8 +68,25 @@ namespace MusicR8r.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+
+            kernel.Bind(x =>
+            {
+                x.FromThisAssembly()
+                 .SelectAllClasses()
+                 .BindDefaultInterface();
+            });
+
+            kernel.Bind(x =>
+            {
+                x.FromAssemblyContaining(typeof(IService))
+                 .SelectAllClasses()
+                 .BindDefaultInterface();
+            });
+
             kernel.Bind(typeof(DbContext), typeof(MsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
             kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
-        }        
+            kernel.Bind<ISaveContext>().To<SaveContext>();
+            kernel.Bind<IMapper>().ToMethod(x => Mapper.Instance);
+        }
     }
 }

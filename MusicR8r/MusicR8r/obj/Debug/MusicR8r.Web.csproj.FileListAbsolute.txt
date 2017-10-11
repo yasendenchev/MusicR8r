@@ -107,3 +107,10 @@ D:\MVC\MusicR8r\MusicR8r\MusicR8r\bin\MusicR8r.Data.pdb
 D:\MVC\MusicR8r\MusicR8r\MusicR8r\bin\MusicR8r.Data.dll.config
 D:\MVC\MusicR8r\MusicR8r\MusicR8r\bin\MusicR8r.Data.Model.pdb
 D:\MVC\MusicR8r\MusicR8r\MusicR8r\bin\MusicR8r.Data.Model.dll.config
+D:\MVC\MusicR8r\MusicR8r\MusicR8r\bin\MusicR8r.Services.dll
+D:\MVC\MusicR8r\MusicR8r\MusicR8r\bin\MusicR8r.Services.pdb
+D:\MVC\MusicR8r\MusicR8r\MusicR8r\bin\Ninject.Extensions.Conventions.dll
+D:\MVC\MusicR8r\MusicR8r\MusicR8r\bin\Ninject.Extensions.Conventions.xml
+D:\MVC\MusicR8r\MusicR8r\MusicR8r\bin\MusicR8r.Services.dll.config
+D:\MVC\MusicR8r\MusicR8r\MusicR8r\bin\AutoMapper.dll
+D:\MVC\MusicR8r\MusicR8r\MusicR8r\bin\AutoMapper.xml

@@ -66,5 +66,10 @@ namespace MusicR8r.Data.Repositories
 
             entry.State = EntityState.Modified;
         }
+
+        public T GetById(object id)
+        {
+            return this.context.Set<T>().Find(id);
+        }
     }
 }
