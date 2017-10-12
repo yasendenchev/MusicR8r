@@ -10,20 +10,23 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 
 ## Tasks
 
+### Continuous integration
+### Unit testing
+### AJAX form
+###
+
+
 ### Admin area
 1) genres
 2) albums
 3) artists
 4) songs
-
-
 #### Genres
 1. pagination and sorting
 2. add functionality (view)
 3. delete functionality (view)
 4. create view
 5. create controller
-
 #### Albums
 1. services:
 - add
@@ -39,7 +42,6 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 6. update functionality (view)
 7. create viewModel
 8. create controller
-
 #### Artists
 1. services:
 - add
@@ -52,7 +54,6 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 4. update functionality (view)
 5. create viewModel
 6. create controller
-
 #### Songs
 1.services:
 - add
