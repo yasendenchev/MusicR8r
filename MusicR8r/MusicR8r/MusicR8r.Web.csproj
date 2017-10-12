@@ -209,8 +209,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArtistController.cs" />
     <Compile Include="Areas\Admin\Controllers\GenreController.cs" />
     <Compile Include="Areas\Admin\Models\AddGenreViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ArtistViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -247,6 +249,11 @@
     <Content Include="Areas\Admin\Views\Genre\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Genre\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Genre\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

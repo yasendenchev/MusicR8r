@@ -9,13 +9,12 @@ namespace MusicR8r.Services.Contracts
 {
     public interface IGenreService : IService
     {
+        void Add(Genre genre);
 
         IQueryable<Genre> GetAll();
 
         IQueryable<Genre> GetAllAndDeleted();
-
-        void Add(Genre genre);
-
+        
         Genre GetById(Guid genreId);
 
         void DeleteById(Guid genreId);

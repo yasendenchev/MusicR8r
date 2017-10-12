@@ -24,8 +24,9 @@ namespace Services.Tests
             var datetimeMock = new Mock<IDateTimeProvider>();
             var service = new GenreService(repositoryMock.Object, saveContextMock.Object, datetimeMock.Object);
             string name = "Rock";
+            Genre genre = new Genre(name);
 
-            service.AddGenre(name);
+            service.Add(genre);
 
             repositoryMock.Verify(r => r.Add(It.IsAny<Genre>()), Times.Once);
         }
@@ -38,8 +39,9 @@ namespace Services.Tests
             var datetimeMock = new Mock<IDateTimeProvider>();
             var service = new GenreService(repositoryMock.Object, saveContextMock.Object, datetimeMock.Object);
             string name = "Rock";
+            Genre genre = new Genre(name);
 
-            service.AddGenre(name);
+            service.Add(genre);
 
             saveContextMock.Verify(s => s.Commit(), Times.Once);
         }

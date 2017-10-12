@@ -26,11 +26,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers.Tests", "Contro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicR8r.Web", "MusicR8r\MusicR8r.Web.csproj", "{C387CEA4-66F2-4292-AD2A-9934F7B64A5C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A4D0504-30DD-4DE8-A3E8-2E3681A1BF09}"
-	ProjectSection(SolutionItems) = preProject
-		Tasks.txt = Tasks.txt
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TelerikAcademy.ForumSystem.Web.Infrastructure
+namespace MusicR8r.Infrastructure
 {
     public interface ICustomMappings
     {

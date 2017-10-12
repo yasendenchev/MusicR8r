@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
-using TelerikAcademy.ForumSystem.Web.Infrastructure;
 
 namespace MusicR8r.App_Start
 {

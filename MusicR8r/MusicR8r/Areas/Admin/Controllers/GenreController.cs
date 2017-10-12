@@ -40,6 +40,7 @@ namespace MusicR8r.Areas.Admin.Controllers
         }
 
         // GET: Admin/Genre/Create
+        [ValidateInput(false)]
         public ActionResult Create()
         {
             return View();
@@ -50,6 +51,7 @@ namespace MusicR8r.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Name")] AddGenreViewModel addGenreViewModel)
         {
             if (ModelState.IsValid)

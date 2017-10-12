@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace MusicR8r.Services
 {
-    public class ArtistService
+    public class ArtistService : IArtistService
     {
         private const string argNullMessage = "cannot be null.";
-        private readonly IEfRepository<Artist> genreRepository;
+        private readonly IEfRepository<Artist> artistRepository;
         private readonly ISaveContext saveContext;
         private readonly IDateTimeProvider dateTimeProvider;
 
 
-        public ArtistService(IEfRepository<Artist> genreRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider)
+        public ArtistService(IEfRepository<Artist> artistRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider)
         {
-            if (genreRepository == null)
+            if (artistRepository == null)
             {
-                throw new ArgumentNullException(String.Format("GenreRepository" + argNullMessage));
+                throw new ArgumentNullException(String.Format("ArtistRepository" + argNullMessage));
             }
 
             if (saveContext == null)
@@ -35,9 +35,47 @@ namespace MusicR8r.Services
                 throw new ArgumentNullException(String.Format("DateTimeProvider" + argNullMessage));
             }
 
-            this.genreRepository = genreRepository;
+            this.artistRepository = artistRepository;
             this.saveContext = saveContext;
             this.dateTimeProvider = dateTimeProvider;
+        }
+
+        public IQueryable<Artist> GetAll()
+        {
+            IQueryable<Artist> artists = this.artistRepository.All;
+            return artists;
+        }
+
+        public IQueryable<Artist> GetAllAndDeleted()
+        {
+            IQueryable<Artist> artists = this.artistRepository.AllAndDeleted;
+            return artists;
+        }
+
+        public void Add(Artist artist)
+        {
+            this.artistRepository.Add(artist);
+            this.saveContext.Commit();
+        }
+
+        public Artist GetById(Guid artistId)
+        {
+            return this.artistRepository.GetById(artistId);
+        }
+
+        public void DeleteById(Guid artistId)
+        {
+            var artist = this.artistRepository.GetById(artistId);
+            var dateDeleted = this.dateTimeProvider.Now();
+
+            if (artist != null)
+            {
+                artist.IsDeleted = true;
+                artist.DeletedOn = this.dateTimeProvider.Now();
+
+                this.artistRepository.Update(artist);
+                this.saveContext.Commit();
+            }
         }
         //        add
 
