@@ -10,8 +10,6 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 
 ## Tasks
 
-tasks:
-
 ### Admin area
 1) genres
 2) albums
