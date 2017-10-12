@@ -12,19 +12,20 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 
 tasks:
 
-### admin area
+### Admin area
 1) genres
 2) albums
 3) artists
 4) songs
 
 
-GENRES
+#### Genres
 1. pagination and sorting
 2. add functionality (view)
 3. delete functionality (view)
+4. create controller
 
-ALBUMS
+#### Albums
 1. services:
 - add
 - update
@@ -40,20 +41,29 @@ ALBUMS
 7. create viewModel
 8. create controller
 
-ARTISTS
+#### Artists
 1. services:
 - add
 - update
 - delete (by id)
 - get all
 - get by id
-2
+2. add functionality (view)
+3. delete functionality (view)
+4. update functionality (view)
+5. create viewModel
+6. create controller
 
-SONGS
+#### Songs
 1.services:
 - add
 - update
 - delete (by id)
 - get by album
 - get by id
+2. add functionality (view)
+3. delete functionality (view)
+4. update functionality (view)
+5. create viewModel
+6. create controller
 
