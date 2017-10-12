@@ -21,7 +21,8 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 1. pagination and sorting
 2. add functionality (view)
 3. delete functionality (view)
-4. create controller
+4. create view
+5. create controller
 
 #### Albums
 1. services:
