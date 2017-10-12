@@ -12,10 +12,12 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 
 ### Continuous integration
 ### Unit testing
-### AJAX form
-###
-
-
+### AJAX form / or SignalR
+### Sections and partial views
+### Security holes prevention
+### Error handling and Data validation
+#### Server-side
+#### Client-side
 ### Admin area
 1) genres
 2) albums
