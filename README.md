@@ -12,11 +12,11 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 
 tasks:
 
--admin area
-1)genres
-2)albums
-3)artists
-4)songs
+### admin area
+1) genres
+2) albums
+3) artists
+4) songs
 
 
 GENRES
@@ -26,12 +26,12 @@ GENRES
 
 ALBUMS
 1. services:
--add
--update
--delete (by id)
--get all
--get by id
--search (by name, by artist, by genre)
+- add
+- update
+- delete (by id)
+- get all
+- get by id
+- search (by name, by artist, by genre)
 2. listing
 3. pagination and sorting
 4. add functionality (view)
@@ -42,18 +42,18 @@ ALBUMS
 
 ARTISTS
 1. services:
--add
--update
--delete (by id)
--get all
--get by id
+- add
+- update
+- delete (by id)
+- get all
+- get by id
 2
 
 SONGS
 1.services:
--add
--update
--delete (by id)
--get by album
--get by id
+- add
+- update
+- delete (by id)
+- get by album
+- get by id
 
