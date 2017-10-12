@@ -20,6 +20,7 @@ namespace MusicR8r.Models
             configuration.CreateMap<Genre, GenreViewModel>()
                 .ForMember(genreViewModel => genreViewModel.Name, cfg => cfg.MapFrom(genre => genre.Name))
                 .ForMember(genreViewModel => genreViewModel.Id, cfg => cfg.MapFrom(genre => genre.Id));
+                
 
         }
     }

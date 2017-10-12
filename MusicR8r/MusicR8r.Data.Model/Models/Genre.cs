@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MusicR8r.Data.Model.Models
 {
@@ -14,7 +16,9 @@ namespace MusicR8r.Data.Model.Models
             this.Name = name;
             this.Songs = new HashSet<Song>();
         }
-        
+
+        [Index(IsUnique = true)]
+        [Required]
         public string Name { get; set; }
 
         public virtual ICollection<Song> Songs { get; set; }

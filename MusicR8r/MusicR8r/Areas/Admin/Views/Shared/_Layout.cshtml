@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,29 +20,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
-                    @if (User.IsInRole("Admin"))
-                    {
-                        @*<li>@Html.ActionLink("Genre", "Index", "Genre", new { area = "Admin" }, new { })</li>*@
-                        <li class="dropdown hover">
-                            <a href="#" class="dropdown-hover" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Admin <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Add Genre", "Index", "Genre", new { area = "Admin" }, new { })</li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">In progress..</li>
-                                <li><a href="#">Here goes the Artist</a></li>
-                                <li><a href="#">Here goes the Album</a></li>
-                            </ul>
-                        </li>
-                    }
                 </ul>
-                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />

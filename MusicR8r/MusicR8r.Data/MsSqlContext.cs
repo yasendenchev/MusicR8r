@@ -16,7 +16,7 @@ namespace MusicR8r.Data
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+
         public IDbSet<Album> Albums { get; set; }
         public IDbSet<Song> Songs { get; set; }
         public IDbSet<Artist> Artists { get; set; }
@@ -42,7 +42,7 @@ namespace MusicR8r.Data
                     e.Entity is IAuditable && ((e.State == EntityState.Added) || (e.State == EntityState.Modified))))
             {
                 var entity = (IAuditable)entry.Entity;
-                if (entry.State == EntityState.Added && entity.CreatedOn == default(DateTime))
+                if (entry.State == EntityState.Added && entity.CreatedOn == null)
                 {
                     entity.CreatedOn = DateTime.Now;
                 }
@@ -57,5 +57,9 @@ namespace MusicR8r.Data
         {
             return new MsSqlDbContext();
         }
+
+        //public System.Data.Entity.DbSet<MusicR8r.Models.GenreViewModel> GenreViewModels { get; set; }
+
+        //public System.Data.Entity.DbSet<MusicR8r.GenreViewModel> GenreViewModels { get; set; }
     }
 }

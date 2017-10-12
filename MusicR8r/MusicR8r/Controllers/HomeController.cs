@@ -14,31 +14,29 @@ namespace MusicR8r.Controllers
 {
     public class HomeController : Controller
     {
-        private IGenreService service;
+        private IGenreService genreService;
         private readonly IMapper mapper;
 
-        public HomeController(IGenreService service, IMapper mapper)
+        public HomeController(IGenreService genreService, IMapper mapper)
         {
-            this.service = service;
+            this.genreService = genreService;
             this.mapper = mapper;
         }
 
         public ActionResult Index()
         {
-            //this.service.AddGenre("Black metal");
 
-            //this.service.DeleteById(new Guid("CEFECC0D-E894-482A-B7F6-1E1FD31D818A"))
-
-            var genres = this.service
+            var genres = this.genreService
             .GetAllAndDeleted();
 
-            var model = genres.ProjectTo<GenreViewModel>().ToList();
+            //var model = genres.ProjectTo<GenreViewModel>().ToList();
+           
             //var genre = this.service.GetById(new Guid("CEFECC0D-E894-482A-B7F6-1E1FD31D818A"));
 
 
             var viewModel = new HomeViewModel()
             {
-                Genres = model
+                //Genres = models
             };
 
             return View(viewModel);

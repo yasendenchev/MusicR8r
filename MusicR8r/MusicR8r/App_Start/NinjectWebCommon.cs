@@ -87,6 +87,7 @@ namespace MusicR8r.App_Start
             kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
             kernel.Bind<ISaveContext>().To<SaveContext>();
             kernel.Bind<IMapper>().ToMethod(x => Mapper.Instance);
+            //kernel.Bind<IMapper>().To<Mapper>();
         }
     }
 }

@@ -1,0 +1,43 @@
+tasks:
+
+-admin area
+1)genres
+2)albums
+3)artists
+4)songs
+
+
+-genres
+1. pagination and sorting
+2. add functionality (UI)
+3. delete functionality (UI)
+
+-albums
+1. services:
+-add
+-update
+-delete (by id)
+-get all
+-get by id
+-search (by name, by artist, by genre)
+2. listing
+3. pagination and sorting
+4. add functionality (UI)
+5. delete functionality (UI)
+6. update functionality (UI)
+
+-artists
+1. services:
+-add
+-update
+-delete (by id)
+-get all
+-get by id
+
+-songs 
+1.services:
+-add
+-update
+-delete (by id)
+-get by album
+-get by id
