@@ -5,10 +5,10 @@ branches:
   
 build:
   verbosity: minimal
-  project: MusicR8r.sln
+  project: MusicR8r/MusicR8r.sln
 
 before_build:
-- ps: nuget restore ./MusicR8r.sln
+- ps: nuget restore ./MusicR8r/MusicR8r.sln
 
 after_test: 
   - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -filter:"+[*]*" -target:"packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console.exe" -targetargs:"/domain:single  MusicR8r/MusicR8r/Services.Tests/bin/Debug/Services.Tests.dll" -output:coverage.xml
