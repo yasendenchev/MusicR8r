@@ -15,6 +15,8 @@ namespace MusicR8r.Services
 
         Artist GetById(Guid artistId);
 
+        void Update(Guid artistId, string artistName, string artistCountry, string artistBio);
+
         void DeleteById(Guid artistId);
     }
 }

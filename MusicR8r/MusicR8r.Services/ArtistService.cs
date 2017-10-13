@@ -63,6 +63,18 @@ namespace MusicR8r.Services
             return this.artistRepository.GetById(artistId);
         }
 
+        public void Update(Guid artistId, string artistName, string artistCountry, string artistBio)
+        {
+            var artist = this.artistRepository.GetById(artistId);
+
+            artist.Name = artistName;
+            artist.CountryOfOrigin = artistCountry;
+            artist.Bio = artistBio;
+
+            this.artistRepository.Update(artist);
+            this.saveContext.Commit();
+        }
+
         public void DeleteById(Guid artistId)
         {
             var artist = this.artistRepository.GetById(artistId);

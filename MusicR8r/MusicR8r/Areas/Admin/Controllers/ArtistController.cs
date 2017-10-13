@@ -11,6 +11,7 @@ using MusicR8r.Data;
 using MusicR8r.Services;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using MusicR8r.Data.Model.Models;
 
 namespace MusicR8r.Areas.Admin.Controllers
 {
@@ -52,86 +53,92 @@ namespace MusicR8r.Areas.Admin.Controllers
             return View(artistViewModel);
         }
 
-        //        // GET: Admin/Artist/Create
-        //        public ActionResult Create()
-        //        {
-        //            return View();
-        //        }
+        // GET: Admin/Artist/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
 
-        //        // POST: Admin/Artist/Create
-        //        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //        [HttpPost]
-        //        [ValidateAntiForgeryToken]
-        //        public ActionResult Create([Bind(Include = "Id,Name,CountryOfOrigin,Bio")] ArtistViewModel artistViewModel)
-        //        {
-        //            if (ModelState.IsValid)
-        //            {
-        //                artistViewModel.Id = Guid.NewGuid();
-        //                db.ArtistViewModels.Add(artistViewModel);
-        //                db.SaveChanges();
-        //                return RedirectToAction("Index");
-        //            }
+        // POST: Admin/Artist/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Name,CountryOfOrigin,Bio")] AddArtistViewModel addArtistViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var artist = new Artist(addArtistViewModel.Name, addArtistViewModel.CountryOfOrigin, addArtistViewModel.Bio);
+                this.artistService.Add(artist);
+                return RedirectToAction("Index");
+            }
 
-        //            return View(artistViewModel);
-        //        }
+            return View(addArtistViewModel);
+        }
 
-        //        // GET: Admin/Artist/Edit/5
-        //        public ActionResult Edit(Guid? id)
-        //        {
-        //            if (id == null)
-        //            {
-        //                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //            }
-        //            ArtistViewModel artistViewModel = db.ArtistViewModels.Find(id);
-        //            if (artistViewModel == null)
-        //            {
-        //                return HttpNotFound();
-        //            }
-        //            return View(artistViewModel);
-        //        }
+        // GET: Admin/Artist/Edit/5
+        public ActionResult Edit(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-        //        // POST: Admin/Artist/Edit/5
-        //        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //        [HttpPost]
-        //        [ValidateAntiForgeryToken]
-        //        public ActionResult Edit([Bind(Include = "Id,Name,CountryOfOrigin,Bio")] ArtistViewModel artistViewModel)
-        //        {
-        //            if (ModelState.IsValid)
-        //            {
-        //                db.Entry(artistViewModel).State = EntityState.Modified;
-        //                db.SaveChanges();
-        //                return RedirectToAction("Index");
-        //            }
-        //            return View(artistViewModel);
-        //        }
+            Artist artist = this.artistService.GetById((Guid)id);
 
-        //        // GET: Admin/Artist/Delete/5
-        //        public ActionResult Delete(Guid? id)
-        //        {
-        //            if (id == null)
-        //            {
-        //                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //            }
-        //            ArtistViewModel artistViewModel = db.ArtistViewModels.Find(id);
-        //            if (artistViewModel == null)
-        //            {
-        //                return HttpNotFound();
-        //            }
-        //            return View(artistViewModel);
-        //        }
+            if (artist == null)
+            {
+                return HttpNotFound();
+            }
 
-        //        // POST: Admin/Artist/Delete/5
-        //        [HttpPost, ActionName("Delete")]
-        //        [ValidateAntiForgeryToken]
-        //        public ActionResult DeleteConfirmed(Guid id)
-        //        {
-        //            ArtistViewModel artistViewModel = db.ArtistViewModels.Find(id);
-        //            db.ArtistViewModels.Remove(artistViewModel);
-        //            db.SaveChanges();
-        //            return RedirectToAction("Index");
-        //        }
+            var artistViewModel = Mapper.Map<ArtistViewModel>(artist);
+
+            return View(artistViewModel);
+        }
+
+        // POST: Admin/Artist/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Name,CountryOfOrigin,Bio")] ArtistViewModel artistViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                this.artistService.Update(artistViewModel.Id, artistViewModel.Name, artistViewModel.CountryOfOrigin, artistViewModel.Bio);
+                return RedirectToAction("Index");
+            }
+            return View(artistViewModel);
+        }
+
+        // GET: Admin/Artist/Delete/5
+        public ActionResult Delete(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Artist artist = this.artistService.GetById((Guid)id);
+
+            ArtistViewModel artistViewModel = Mapper.Map<ArtistViewModel>(artist);
+
+            if (artistViewModel == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(artistViewModel);
+        }
+
+        // POST: Admin/Artist/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(Guid id)
+        {
+            this.artistService.DeleteById(id);
+            return RedirectToAction("Index");
+        }
 
         //        protected override void Dispose(bool disposing)
         //        {

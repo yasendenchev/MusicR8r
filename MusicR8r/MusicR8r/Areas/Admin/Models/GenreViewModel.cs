@@ -18,11 +18,14 @@ namespace MusicR8r.Areas.Admin.Models
         [RegularExpression("[a-zA-Z]{3,15}", ErrorMessage = "Genre name should contain only letters")]
         public string Name { get; set; }
 
+        public int SongsCount { get; set; }
+
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Genre, GenreViewModel>()
                 .ForMember(genreViewModel => genreViewModel.Name, cfg => cfg.MapFrom(genre => genre.Name))
-                .ForMember(genreViewModel => genreViewModel.Id, cfg => cfg.MapFrom(genre => genre.Id));
+                .ForMember(genreViewModel => genreViewModel.Id, cfg => cfg.MapFrom(genre => genre.Id))
+                .ForMember(genreViewModel => genreViewModel.SongsCount, cfg => cfg.MapFrom(genre => genre.Songs.Count()));
         }
     }
 }

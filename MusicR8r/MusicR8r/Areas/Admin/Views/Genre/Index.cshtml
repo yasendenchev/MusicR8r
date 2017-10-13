@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<MusicR8r.Areas.Admin.Models.GenreViewModel>
+@using Kendo.Mvc.UI;
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,31 +11,38 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <style>
+        a {
+            color: white;
+        }
+        a:hover {
+            color: white;
+        }
+        button > a:hover {
+            text-decoration: none;
+        }
+        button > a {
+            font-size: x-large
+        }
+    </style>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-    }
-    
-    </table>
+    <button type="button" class="btn btn-success" >@Html.ActionLink("+", "Create")</button>
+        
 </body>
 </html>
+
+
+@(Html.Kendo().Grid(Model)
+                .Name("Grid")
+                .Columns(columns =>
+                {
+                    columns.Bound(p => p.Name).Title("Genre name");
+                    columns.Bound(p => p.SongsCount).Title("Songs");
+                    columns.Template(c => @Html.ActionLink("Delete Genre", "Delete", new { id = c.Id }));
+                })
+                .Pageable()
+                .Sortable()
+                .HtmlAttributes(new { style = "height:70%;" })
+)
+

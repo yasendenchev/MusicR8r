@@ -13,13 +13,13 @@ namespace MusicR8r.Data.Model.Models
             this.Albums = new HashSet<Album>();
         }
 
-        //public Artist(string name, string countryOfOrigin, string bio, ICollection<Album> albums)
-        //{
-        //    this.Name = name;
-        //    this.CountryOfOrigin = countryOfOrigin;
-        //    this.Bio = bio;
-        //    this.Albums = albums;
-        //}
+        public Artist(string name, string countryOfOrigin, string bio)
+        {
+            this.Name = name;
+            this.CountryOfOrigin = countryOfOrigin;
+            this.Bio = bio;
+            this.Albums = new HashSet<Album>();
+        }
 
         public string Name { get; set; }
 

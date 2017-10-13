@@ -13,6 +13,8 @@ using AutoMapper;
 using MusicR8r.Models;
 using AutoMapper.QueryableExtensions;
 using MusicR8r.Areas.Admin.Models;
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
 
 namespace MusicR8r.Areas.Admin.Controllers
 {
@@ -34,7 +36,7 @@ namespace MusicR8r.Areas.Admin.Controllers
         {
             var genres = this.genreService.GetAll();
 
-            var models = genres.ProjectTo<GenreViewModel>();
+            var models = genres.ProjectTo<GenreViewModel>().AsEnumerable();
 
             return View(models);
         }
@@ -74,16 +76,18 @@ namespace MusicR8r.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Genre genre = this.genreService.GetById((Guid)id);
+
             if (genre == null)
             {
                 return HttpNotFound();
             }
-            GenreViewModel viewModel = Mapper.Map<GenreViewModel>(genre);
 
+            GenreViewModel genreViewModel = Mapper.Map<GenreViewModel>(genre);
 
             //returns genre
-            return View(viewModel);
+            return View(genreViewModel);
         }
 
         // POST: Admin/Genre/Delete/5
@@ -99,7 +103,7 @@ namespace MusicR8r.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                //db.Dispose();
+                //this.genreService
             }
             base.Dispose(disposing);
         }
