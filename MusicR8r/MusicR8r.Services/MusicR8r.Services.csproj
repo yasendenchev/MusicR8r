@@ -30,7 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop, Version=5.0.0.0, Culture=neutral, PublicKeyToken=f904653c63bc2738, processorArchitecture=MSIL">
+      <HintPath>..\packages\StyleCop.5.0.0\lib\net40\StyleCop.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,9 +55,13 @@
     <Compile Include="Contracts\IService.cs" />
     <Compile Include="GenreService.cs" />
     <Compile Include="Contracts\IArtistService.cs" />
+    <Compile Include="Contracts\ISongService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AlbumService.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
+    <Compile Include="Contracts\IAlbumService.cs" />
     <Compile Include="Providers\IDateTimeProvider.cs" />
+    <Compile Include="SongService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MusicR8r.Data.Model\MusicR8r.Data.Model.csproj">

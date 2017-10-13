@@ -13,7 +13,7 @@ namespace MusicR8r.Services.Contracts
 
         IQueryable<Genre> GetAll();
 
-        IQueryable<Genre> GetAllAndDeleted();
+        //IQueryable<Genre> GetAllAndDeleted();
         
         Genre GetById(Guid genreId);
 

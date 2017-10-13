@@ -10,6 +10,7 @@ using MusicR8r.Data.Repositories;
 using MusicR8r.Data.SaveContext;
 using MusicR8r.Services.Contracts;
 using MusicR8r.Services.Providers;
+using System.Data.Entity;
 
 namespace MusicR8r.Services
 {
@@ -49,11 +50,11 @@ namespace MusicR8r.Services
             return genres;
         }
 
-        public IQueryable<Genre> GetAllAndDeleted()
-        {
-            IQueryable<Genre> genres = this.genreRepository.AllAndDeleted;
-            return genres;
-        }
+        //public IQueryable<Genre> GetAllAndDeleted()
+        //{
+        //    IQueryable<Genre> genres = this.genreRepository.AllAndDeleted;
+        //    return genres;
+        //}
 
         public void Add(Genre genre)
         {

@@ -15,15 +15,17 @@ using AutoMapper.QueryableExtensions;
 using MusicR8r.Areas.Admin.Models;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace MusicR8r.Areas.Admin.Controllers
 {
-    public class GenreController : Controller
+    public class GenresController : Controller
     {
         private readonly IGenreService genreService;
         private readonly IMapper mapper;
 
-        public GenreController(IGenreService genreService, IMapper mapper)
+        public GenresController(IGenreService genreService, IMapper mapper)
         {
             this.genreService = genreService;
             this.mapper = mapper;
@@ -34,11 +36,16 @@ namespace MusicR8r.Areas.Admin.Controllers
         // GET: Admin/Genre
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public async Task<ActionResult> ListGenres([DataSourceRequest] DataSourceRequest request)
+        {
             var genres = this.genreService.GetAll();
 
             var models = genres.ProjectTo<GenreViewModel>().AsEnumerable();
-
-            return View(models);
+            DataSourceResult result = await models.ToDataSourceResultAsync(request);
+            return Json(result);
         }
 
         // GET: Admin/Genre/Create
@@ -53,16 +60,25 @@ namespace MusicR8r.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
+        [AcceptVerbs(HttpVerbs.Post)]
+        //[ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Name")] AddGenreViewModel addGenreViewModel)
         {
+            //if (string.IsNullOrEmpty(addGenreViewModel.Name))
+            //{
+            //    ModelState.AddModelError("Name", "Name is required");
+            //}
+
+            //if (Regex.IsMatch(addGenreViewModel.Name, "^[A-Z][-a-zA-Z]+$"))
+            //{
+            //    ModelState.AddModelError("Name", "Name must contain only letters");
+            //}
+
             if (ModelState.IsValid)
             {
-                //genre.Id = Guid.NewGuid();
-                //db.Genres.Add(genre);
-                //db.SaveChanges();
                 var genre = new Genre(addGenreViewModel.Name);
                 this.genreService.Add(genre);
+               
                 return RedirectToAction("Index");
             }
 

@@ -19,27 +19,31 @@
             <dt>
                 @Html.DisplayNameFor(model => model.Name)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Name)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.CountryOfOrigin)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.CountryOfOrigin)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Bio)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Bio)
             </dd>
-    
+
+            <button>
+                @Html.ActionLink("Albums", "GetByArtist", "Album", new { id = Model.Id })
+            </button>
+
         </dl>
     </div>
     <p>

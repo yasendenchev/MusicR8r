@@ -18,7 +18,8 @@ namespace MusicR8r.Data.Model.Models
         }
 
         [Index(IsUnique = true)]
-        [Required]
+        [Required(ErrorMessage = "Name is Required")]
+        [RegularExpression("^[A-Z][-a-zA-Z]+$", ErrorMessage ="Name is not valid!")]
         public string Name { get; set; }
 
         public virtual ICollection<Song> Songs { get; set; }

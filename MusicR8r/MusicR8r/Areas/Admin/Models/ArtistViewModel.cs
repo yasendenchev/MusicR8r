@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AutoMapper;
+using MusicR8r.Models;
 
 namespace MusicR8r.Areas.Admin.Models
 {

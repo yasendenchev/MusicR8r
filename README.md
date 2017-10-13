@@ -10,6 +10,11 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 
 ## Tasks
 
+### Fix Artist, Albums, Songs Delete Services!!!!
+### Remove business logic from all controlers!!!!
+### Fix add Services on every model!!!!
+### Implement Albums Controller!!!!
+
 ### Continuous integration
 ### Unit testing
 ### AJAX form / or SignalR

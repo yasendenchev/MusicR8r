@@ -11,7 +11,7 @@ namespace MusicR8r.Services
 
         IQueryable<Artist> GetAll();
 
-        IQueryable<Artist> GetAllAndDeleted();
+        //IQueryable<Artist> GetAllAndDeleted();
 
         Artist GetById(Guid artistId);
 

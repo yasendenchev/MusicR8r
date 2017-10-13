@@ -23,6 +23,7 @@ namespace MusicR8r.Data.Model.Models
         //    this.Users = users;
         //}
 
+
         public string Name { get; set; }
 
         public int Year { get; set; }

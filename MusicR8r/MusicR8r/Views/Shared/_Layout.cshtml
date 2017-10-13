@@ -44,11 +44,8 @@
                         <li class="dropdown hover">
                             <a href="#" class="dropdown-hover" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Admin <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Genres", "Index", "Genre", new { area = "Admin" }, new { })</li>
-                                <li>@Html.ActionLink("Artists", "Index", "Artist", new { area = "Admin" }, new { })</li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">In progress..</li>
-                                <li><a href="#">Here goes Albums</a></li>
+                                <li>@Html.ActionLink("Genres", "Index", "Genres", new { area = "Admin" }, new { })</li>
+                                <li>@Html.ActionLink("Artists", "Index", "Artists", new { area = "Admin" }, new { })</li>
                             </ul>
                         </li>
                     }

@@ -58,10 +58,6 @@ namespace MusicR8r.Data
             return new MsSqlDbContext();
         }
 
-        //public DbSet<MusicR8r.Areas.Admin.Models.ArtistViewModel> ArtistViewModels { get; set; }
-
-        //public System.Data.Entity.DbSet<MusicR8r.Models.GenreViewModel> GenreViewModels { get; set; }
-
-        //public System.Data.Entity.DbSet<MusicR8r.GenreViewModel> GenreViewModels { get; set; }
+        //public System.Data.Entity.DbSet<MusicR8r.Areas.Admin.Models.AlbumViewModel> AlbumViewModels { get; set; }
     }
 }

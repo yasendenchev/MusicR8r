@@ -26,8 +26,8 @@ namespace MusicR8r.Controllers
         public ActionResult Index()
         {
 
-            var genres = this.genreService
-            .GetAllAndDeleted();
+            //var genres = this.genreService
+            //.GetAllAndDeleted();
 
             //var model = genres.ProjectTo<GenreViewModel>().ToList();
            

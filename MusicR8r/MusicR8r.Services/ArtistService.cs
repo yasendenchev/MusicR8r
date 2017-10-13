@@ -46,11 +46,11 @@ namespace MusicR8r.Services
             return artists;
         }
 
-        public IQueryable<Artist> GetAllAndDeleted()
-        {
-            IQueryable<Artist> artists = this.artistRepository.AllAndDeleted;
-            return artists;
-        }
+        //public IQueryable<Artist> GetAllAndDeleted()
+        //{
+        //    IQueryable<Artist> artists = this.artistRepository.AllAndDeleted;
+        //    return artists;
+        //}
 
         public void Add(Artist artist)
         {
@@ -89,15 +89,5 @@ namespace MusicR8r.Services
                 this.saveContext.Commit();
             }
         }
-        //        add
-
-        //update
-
-        //delete(by id)
-
-        //get all
-
-        //get by id
-
     }
 }

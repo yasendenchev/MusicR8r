@@ -12,15 +12,18 @@ using MusicR8r.Services;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MusicR8r.Data.Model.Models;
+using Kendo.Mvc.UI;
+using System.Threading.Tasks;
+using Kendo.Mvc.Extensions;
 
 namespace MusicR8r.Areas.Admin.Controllers
 {
-    public class ArtistController : Controller
+    public class ArtistsController : Controller
     {
         private readonly IArtistService artistService;
         private readonly IMapper mapper;
 
-        public ArtistController(IArtistService artistService, IMapper mapper)
+        public ArtistsController(IArtistService artistService, IMapper mapper)
         {
             this.artistService = artistService;
             this.mapper = mapper;
@@ -29,10 +32,20 @@ namespace MusicR8r.Areas.Admin.Controllers
         // GET: Admin/Artist
         public ActionResult Index()
         {
+            //var artists = this.artistService.GetAll();
+
+            //var models = artists.ProjectTo<ArtistViewModel>();
+            return View(/*models*/);
+        }
+
+        public async Task<ActionResult> ListArtists([DataSourceRequest] DataSourceRequest request)
+        {
             var artists = this.artistService.GetAll();
 
-            var models = artists.ProjectTo<ArtistViewModel>();
-            return View(models);
+            var models = artists.ProjectTo<ArtistViewModel>().AsEnumerable();
+            DataSourceResult result = await models.ToDataSourceResultAsync(request);
+            var json = Json(result);
+            return json;
         }
 
         // GET: Admin/Artist/Details/5

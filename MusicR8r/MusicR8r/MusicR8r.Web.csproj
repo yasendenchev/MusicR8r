@@ -74,6 +74,9 @@
     <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="StyleCop, Version=5.0.0.0, Culture=neutral, PublicKeyToken=f904653c63bc2738, processorArchitecture=MSIL">
+      <HintPath>..\packages\StyleCop.5.0.0\lib\net40\StyleCop.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -213,10 +216,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\ArtistController.cs" />
-    <Compile Include="Areas\Admin\Controllers\GenreController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AlbumsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArtistsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GenresController.cs" />
     <Compile Include="Areas\Admin\Models\AddArtistViewModel.cs" />
     <Compile Include="Areas\Admin\Models\AddGenreViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\AlbumViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ArtistViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -251,14 +256,20 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Genre\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Genre\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Genre\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Artist\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Artist\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Artist\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Artist\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Artist\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Genres\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Genres\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Genres\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Artists\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Artists\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Artists\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Artists\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Artists\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\All.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
