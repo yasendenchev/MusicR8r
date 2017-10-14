@@ -9,7 +9,7 @@ namespace MusicR8r.Services.Contracts
 {
     public interface IGenreService : IService
     {
-        void Add(Genre genre);
+        void AddGenre(string name);
 
         IQueryable<Genre> GetAll();
 

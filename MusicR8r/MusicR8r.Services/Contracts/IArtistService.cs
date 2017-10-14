@@ -3,11 +3,11 @@ using MusicR8r.Services.Contracts;
 using System;
 using System.Linq;
 
-namespace MusicR8r.Services
+namespace MusicR8r.Contracts.Services
 {
     public interface IArtistService : IService
     {
-        void Add(Artist artist);
+        void AddArtist(Artist artist);
 
         IQueryable<Artist> GetAll();
 

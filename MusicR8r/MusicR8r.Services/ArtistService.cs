@@ -1,12 +1,10 @@
-﻿using MusicR8r.Data.Model.Models;
+﻿using MusicR8r.Contracts.Services;
+using MusicR8r.Data.Model.Models;
 using MusicR8r.Data.Repositories;
 using MusicR8r.Data.SaveContext;
 using MusicR8r.Services.Providers;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicR8r.Services
 {
@@ -16,9 +14,10 @@ namespace MusicR8r.Services
         private readonly IEfRepository<Artist> artistRepository;
         private readonly ISaveContext saveContext;
         private readonly IDateTimeProvider dateTimeProvider;
+        private readonly IAlbumService albumService;
 
 
-        public ArtistService(IEfRepository<Artist> artistRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider)
+        public ArtistService(IEfRepository<Artist> artistRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider, IAlbumService albumService)
         {
             if (artistRepository == null)
             {
@@ -35,9 +34,15 @@ namespace MusicR8r.Services
                 throw new ArgumentNullException(String.Format("DateTimeProvider" + argNullMessage));
             }
 
+            if (dateTimeProvider == null)
+            {
+                throw new ArgumentNullException(String.Format("AlbumService" + argNullMessage));
+            }
+
             this.artistRepository = artistRepository;
             this.saveContext = saveContext;
             this.dateTimeProvider = dateTimeProvider;
+            this.albumService = albumService;
         }
 
         public IQueryable<Artist> GetAll()
@@ -52,7 +57,7 @@ namespace MusicR8r.Services
         //    return artists;
         //}
 
-        public void Add(Artist artist)
+        public void AddArtist(Artist artist)
         {
             this.artistRepository.Add(artist);
             this.saveContext.Commit();
@@ -79,6 +84,14 @@ namespace MusicR8r.Services
         {
             var artist = this.artistRepository.GetById(artistId);
             var dateDeleted = this.dateTimeProvider.Now();
+
+            if (artist.Albums.Count > 0)
+            {
+                foreach (var album in artist.Albums)
+                {
+                    albumService.DeleteById(album.Id);
+                }
+            }
 
             if (artist != null)
             {

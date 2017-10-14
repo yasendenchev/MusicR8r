@@ -5,9 +5,7 @@ namespace MusicR8r.Data
     using MusicR8r.Data.Model.Models;
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     public sealed class Configuration : DbMigrationsConfiguration<MsSqlDbContext>
     {
@@ -49,16 +47,14 @@ namespace MusicR8r.Data
             var songs = new List<Song>();
 
             var sampleGenre = new Genre { Name = genreName };
-
-
+            
             var roleName = "Admin";
 
             var roleStore = new RoleStore<IdentityRole>(context);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
             var role = new IdentityRole { Name = roleName };
             roleManager.Create(role);
-
-
+            
             for (int i = 0; i < 100; i++)
             {
                 var user = this.SeedUser(i, context, roleName, userFirstName + i, userLastName + i, userPhone, userBio + i);
@@ -99,6 +95,7 @@ namespace MusicR8r.Data
                 Artist = artist,
                 Users = users
             };
+
             context.Albums.AddOrUpdate(album);
 
             return album;

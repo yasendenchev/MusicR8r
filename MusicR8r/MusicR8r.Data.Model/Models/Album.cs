@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicR8r.Data.Model.Models
 {
@@ -14,14 +11,14 @@ namespace MusicR8r.Data.Model.Models
             this.Users = new HashSet<User>();
         }
 
-        //public Album(string name, int year, Artist artist, ICollection<Song> songs, ICollection<User> users)
-        //{
-        //    this.Name = name;
-        //    this.Year = year;
-        //    this.Artist = artist;
-        //    this.Songs = songs;
-        //    this.Users = users;
-        //}
+        public Album(string name, int year, Artist artist)
+        {
+            this.Name = name;
+            this.Year = year;
+            this.Artist = artist;
+            this.Songs = new HashSet<Song>();
+            this.Users = new HashSet<User>();
+        }
 
 
         public string Name { get; set; }

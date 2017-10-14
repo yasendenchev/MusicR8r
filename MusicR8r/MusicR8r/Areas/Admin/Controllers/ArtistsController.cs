@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using MusicR8r.Areas.Admin.Models;
+using MusicR8r.Contracts.Services;
+using MusicR8r.Data.Model.Models;
+using System;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using MusicR8r.Areas.Admin.Models;
-using MusicR8r.Data;
-using MusicR8r.Services;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using MusicR8r.Data.Model.Models;
-using Kendo.Mvc.UI;
 using System.Threading.Tasks;
-using Kendo.Mvc.Extensions;
+using System.Web.Mvc;
 
 namespace MusicR8r.Areas.Admin.Controllers
 {
@@ -82,7 +78,7 @@ namespace MusicR8r.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var artist = new Artist(addArtistViewModel.Name, addArtistViewModel.CountryOfOrigin, addArtistViewModel.Bio);
-                this.artistService.Add(artist);
+                this.artistService.AddArtist(artist);
                 return RedirectToAction("Index");
             }
 

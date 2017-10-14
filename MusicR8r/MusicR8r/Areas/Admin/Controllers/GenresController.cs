@@ -62,7 +62,7 @@ namespace MusicR8r.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         [AcceptVerbs(HttpVerbs.Post)]
         //[ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Name")] AddGenreViewModel addGenreViewModel)
+        public ActionResult Create([Bind(Include = "Name")] GenreViewModel genreViewModel)
         {
             //if (string.IsNullOrEmpty(addGenreViewModel.Name))
             //{
@@ -76,13 +76,12 @@ namespace MusicR8r.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                var genre = new Genre(addGenreViewModel.Name);
-                this.genreService.Add(genre);
+                this.genreService.AddGenre(genreViewModel.Name);
                
                 return RedirectToAction("Index");
             }
 
-            return View(addGenreViewModel);
+            return View(genreViewModel);
         }
 
         // GET: Admin/Genre/Delete/5

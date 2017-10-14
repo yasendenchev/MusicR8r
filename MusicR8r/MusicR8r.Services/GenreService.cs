@@ -56,8 +56,9 @@ namespace MusicR8r.Services
         //    return genres;
         //}
 
-        public void Add(Genre genre)
+        public void AddGenre(string name)
         {
+            var genre = new Genre(name);
             this.genreRepository.Add(genre);
             this.saveContext.Commit();
         }

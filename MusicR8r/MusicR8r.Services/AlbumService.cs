@@ -1,15 +1,12 @@
-﻿using MusicR8r.Data.Model.Models;
+﻿using MusicR8r.Contracts.Services;
+using MusicR8r.Data.Model.Models;
 using MusicR8r.Data.Repositories;
 using MusicR8r.Data.SaveContext;
-using MusicR8r.Services.Contracts;
+using MusicR8r.Services.Providers;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MusicR8r.Services.Providers
+namespace MusicR8r.Services
 {
     public class AlbumService : IAlbumService
     {
@@ -17,11 +14,8 @@ namespace MusicR8r.Services.Providers
         private readonly IEfRepository<Album> albumRepository;
         private readonly ISaveContext saveContext;
         private readonly IDateTimeProvider dateTimeProvider;
-        private readonly IArtistService artistService;
 
-
-
-        public AlbumService(IEfRepository<Album> albumRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider, IArtistService artistService)
+        public AlbumService(IEfRepository<Album> albumRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider)
         {
             if (albumRepository == null)
             {
@@ -38,15 +32,9 @@ namespace MusicR8r.Services.Providers
                 throw new ArgumentNullException(String.Format("DateTimeProvider" + argNullMessage));
             }
 
-            if (artistService == null)
-            {
-                throw new ArgumentNullException(String.Format("ArtistService" + argNullMessage));
-            }
-
             this.albumRepository = albumRepository;
             this.saveContext = saveContext;
             this.dateTimeProvider = dateTimeProvider;
-            this.artistService = artistService;
         }
 
         //get all
@@ -59,15 +47,19 @@ namespace MusicR8r.Services.Providers
 
         //add
 
-        public void Add(string name, int year, Guid albumId)
+        public void AddAlbum(string name, int year, Guid artistId)
         {
-            //new Album 
-            //this.albumRepository.Add(album);
+            //
+            //
+            //
+            //
+            var artist = this.albumRepository.All.FirstOrDefault(a => a.Artist.Id.Equals(artistId)).Artist;
+            var album = new Album(name, year, artist);
+            this.albumRepository.Add(album);
             this.saveContext.Commit();
         }
 
         //get by id
-
         public Album GetById(Guid albumId)
         {
             return this.albumRepository.GetById(albumId);
@@ -119,11 +111,20 @@ namespace MusicR8r.Services.Providers
         }
 
         //search(by albumName, by ARTIST, by genre)
-        public void Search(string searchParameter)
+        public IQueryable<Album> Search(string searchParameter)
         {
             //var albumsByGenre = this.albumRepository.All.Where(p => p.Songs.Any(s => s.Genres.Any(g => g.Name == parameter)));
             var albums = this.albumRepository.All
-                .Where(album => album.Artist.Name.Equals(searchParameter));
+                .Where(album =>
+                    album.Artist.Name.Contains(searchParameter))
+                .Where(album =>
+                    album.Songs.Any(song =>
+                        song.Genres.Any(genre =>
+                            genre.Name.Contains(searchParameter))))
+                .Where(album =>
+                    album.Name.Contains(searchParameter));
+
+            return albums;
         }
     }
 }

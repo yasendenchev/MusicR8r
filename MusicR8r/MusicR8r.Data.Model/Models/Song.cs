@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MusicR8r.Data.Model.Models
 {
@@ -13,6 +9,15 @@ namespace MusicR8r.Data.Model.Models
             this.Genres = new HashSet<Genre>();
         }
 
+        public Song(string name, int duration, Artist artist, Album album)
+        {
+            this.Genres = new HashSet<Genre>();
+            this.Name = name;
+            this.Duration = duration;
+            this.Artist = artist;
+            this.Album = album;
+        }
+        
         public string Name { get; set; }
 
         public int Duration { get; set; }

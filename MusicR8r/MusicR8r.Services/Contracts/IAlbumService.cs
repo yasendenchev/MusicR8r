@@ -9,7 +9,7 @@ namespace MusicR8r.Services.Providers
     {
         IQueryable<Album> GetAll();
 
-        void Add(string name, int year, Guid albumId);
+        void AddAlbum(string name, int year, Guid artistId);
 
         Album GetById(Guid albumId);
 

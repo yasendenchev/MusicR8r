@@ -1,11 +1,7 @@
 ﻿using MusicR8r.Data.Model.Contracts;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicR8r.Data.Model
 {
@@ -30,7 +26,5 @@ namespace MusicR8r.Data.Model
 
         [DataType(DataType.DateTime)]
         public DateTime? ModifiedOn { get; set; }
-
-
     }
 }

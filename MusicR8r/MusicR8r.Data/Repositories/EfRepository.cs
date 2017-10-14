@@ -1,5 +1,4 @@
-﻿using MusicR8r.Data;
-using MusicR8r.Data.Model.Contracts;
+﻿using MusicR8r.Data.Model.Contracts;
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;

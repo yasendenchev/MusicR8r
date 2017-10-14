@@ -79,11 +79,8 @@ namespace MusicR8r.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var album = new Album();
-                //albumViewModel.Id = Guid.NewGuid();
-                //this.albumService.Add()
-                //db.SaveChanges();
-                //return RedirectToAction("Index");
+                this.albumService.AddAlbum(albumViewModel.Name, albumViewModel.Year, artistId);
+                return RedirectToAction("All");
             }
 
             return View(albumViewModel);

@@ -41,9 +41,6 @@
     <Reference Include="nunit.framework, Version=3.7.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.7.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="StyleCop, Version=5.0.0.0, Culture=neutral, PublicKeyToken=f904653c63bc2738, processorArchitecture=MSIL">
-      <HintPath>..\packages\StyleCop.5.0.0\lib\net40\StyleCop.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -55,12 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenreServiceTest\AddGenre_Should.cs" />
-    <Compile Include="GenreServiceTest\Constructor_Should.cs" />
-    <Compile Include="GenreServiceTest\DeleteById_Should.cs" />
-    <Compile Include="GenreServiceTest\GetAllAndDeletedShould.cs" />
-    <Compile Include="GenreServiceTest\GetAll_Should.cs" />
-    <Compile Include="GenreServiceTest\GetById_Should.cs" />
+    <Compile Include="AlbumServiceTests\AddAlbum_Should.cs" />
+    <Compile Include="AlbumServiceTests\DeleteById_Should.cs" />
+    <Compile Include="AlbumServiceTests\GetAll_Should.cs" />
+    <Compile Include="AlbumServiceTests\GetById_Should.cs" />
+    <Compile Include="AlbumServiceTests\Update_Should.cs" />
+    <Compile Include="GenreServiceTests\AddGenre_Should.cs" />
+    <Compile Include="GenreServiceTests\Constructor_Should.cs" />
+    <Compile Include="GenreServiceTests\DeleteById_Should.cs" />
+    <Compile Include="GenreServiceTests\GetAllAndDeletedShould.cs" />
+    <Compile Include="GenreServiceTests\GetAll_Should.cs" />
+    <Compile Include="GenreServiceTests\GetById_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,5 +89,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
