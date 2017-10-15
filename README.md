@@ -17,6 +17,7 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 ### Implement Albums Controller!!!! - done
 ### Implement Public Songs Controller!!!
 ### Implement Chat
+### Decouple Auth Service
 
 ### Remove user collection functionality
 
