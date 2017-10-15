@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MusicR8r.Models.AlbumViewModel>
+@using Kendo.Mvc.UI;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Kendo().TextBox().Name("Search")
+@Html.Kendo().Button().Name("GridSeachButton").Events(ev => ev.Click("searchGrid")).Content("Search")
+
+    @(Html.Kendo().Grid(Model)
+                    .Name("Grid")
+                    .Columns(columns =>
+                    {
+                    columns.Bound(album => album.Name).Title("Album name").Width("20%");
+                    columns.Bound(album => album.Year).Width("25%");
+                    columns.Bound(album => album.ArtistName).Title("Artist").Width("25%");
+                    columns.Template(@<text>Details</text>)
+                        .ClientTemplate(@Html.ActionLink("Details", "Details", "Albums", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
+                    columns.Template(@<text>Edit</text>)
+                        .ClientTemplate(@Html.ActionLink("Edit", "Edit", "Albums", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
+                    columns.Template(@<text>Delete</text>)
+                        .ClientTemplate(@Html.ActionLink("Delete", "Delete", "Albums", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
+                    columns.Template(@<text>Songs</text>)
+                        .ClientTemplate(@Html.ActionLink("Songs", "All", "Songs", new { albumId = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
+                    })
+                    .Pageable()
+                    .Filterable()
+                    .Sortable()
+                    .HtmlAttributes(new { style = "height:70%;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .PageSize(20)
+                        .Read(read => read.Action("ListAlbums", "Albums"))
+                     )
+    )
+
+
+<script>
+    function searchGrid(e) {
+        $("#Grid").data("kendoGrid").dataSource.filter({
+            logic: "or", filters: [{ field: "Name", operator: "contains", value: $("#Search").val() }]
+
+        });
+    }
+</script>

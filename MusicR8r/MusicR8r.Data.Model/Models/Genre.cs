@@ -17,9 +17,9 @@ namespace MusicR8r.Data.Model.Models
             this.Songs = new HashSet<Song>();
         }
 
+        [Column(TypeName = "NVARCHAR")]
         [Index(IsUnique = true)]
         [Required(ErrorMessage = "Name is Required")]
-        [RegularExpression("^[A-Z][-a-zA-Z]+$", ErrorMessage ="Name is not valid!")]
         public string Name { get; set; }
 
         public virtual ICollection<Song> Songs { get; set; }

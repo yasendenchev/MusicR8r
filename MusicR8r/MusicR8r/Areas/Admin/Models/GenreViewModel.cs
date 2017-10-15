@@ -14,8 +14,8 @@ namespace MusicR8r.Areas.Admin.Models
     {
         public string Id { get; set; }
 
-        [AllowHtml]
-        //[RegularExpression("[a-zA-Z]{3,15}", ErrorMessage = "Genre name should contain only letters")]
+        [RegularExpression("[a-zA-Z]{3,15}", ErrorMessage = "Genre name should contain only letters")]
+        [Required(ErrorMessage = "Name is required!")]
         public string Name { get; set; }
 
         public int SongsCount { get; set; }

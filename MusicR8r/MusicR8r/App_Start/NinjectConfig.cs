@@ -1,5 +1,5 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MusicR8r.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MusicR8r.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MusicR8r.App_Start.NinjectConfig), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MusicR8r.App_Start.NinjectConfig), "Stop")]
 
 namespace MusicR8r.App_Start
 {
@@ -18,7 +18,7 @@ namespace MusicR8r.App_Start
     using MusicR8r.Data.SaveContext;
     using AutoMapper;
 
-    public static class NinjectWebCommon
+    public static class NinjectConfig
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
@@ -86,8 +86,7 @@ namespace MusicR8r.App_Start
             kernel.Bind(typeof(DbContext), typeof(MsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
             kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
             kernel.Bind<ISaveContext>().To<SaveContext>();
-            kernel.Bind<IMapper>().ToMethod(x => Mapper.Instance);
-            //kernel.Bind<IMapper>().To<Mapper>();
+            kernel.Bind<IMapper>().ToMethod(x => Mapper.Instance).InSingletonScope();
         }
     }
 }

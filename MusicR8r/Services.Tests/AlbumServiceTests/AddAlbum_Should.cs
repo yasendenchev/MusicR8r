@@ -22,9 +22,10 @@ namespace Services.Tests.AlbumServiceTests
         public void CallRepositoryAdd_WhenInvoked()
         {
             var repositoryMock = new Mock<IEfRepository<Album>>();
+            var repositoryArtistMock = new Mock<IEfRepository<Artist>>();
             var saveContextMock = new Mock<ISaveContext>();
             var dateTimeProvider = new Mock<IDateTimeProvider>();
-            var service = new AlbumService(repositoryMock.Object, saveContextMock.Object, dateTimeProvider.Object);
+            var service = new AlbumService(repositoryMock.Object, repositoryArtistMock.Object, saveContextMock.Object, dateTimeProvider.Object);
             var name = "AlbumName";
             var year = 1998;
             var guid = Guid.NewGuid();
@@ -50,9 +51,10 @@ namespace Services.Tests.AlbumServiceTests
         public void CallSaveContextCommit_WhenInvoked()
         {
             var repositoryMock = new Mock<IEfRepository<Album>>();
+            var repositoryArtistMock = new Mock<IEfRepository<Artist>>();
             var saveContextMock = new Mock<ISaveContext>();
             var dateTimeProvider = new Mock<IDateTimeProvider>();
-            var service = new AlbumService(repositoryMock.Object, saveContextMock.Object, dateTimeProvider.Object);
+            var service = new AlbumService(repositoryMock.Object, repositoryArtistMock.Object, saveContextMock.Object, dateTimeProvider.Object);
             var name = "AlbumName";
             var year = 1998;
             var guid = Guid.NewGuid();

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Globalization;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using MusicR8r.AuthProvider;
+using MusicR8r.Data.Model.Models;
+using MusicR8r.Models;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using MusicR8r.Models;
-using MusicR8r.Data.Model.Models;
 
 namespace MusicR8r.Controllers
 {

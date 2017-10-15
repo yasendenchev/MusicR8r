@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<MusicR8r.Areas.Admin.Models.AlbumViewModel>
+@*@model IEnumerable<MusicR8r.Areas.Admin.Models.AlbumViewModel>
 @using Kendo.Mvc.UI;
 
 @{
@@ -33,7 +33,6 @@
 </head>
 <body>
     <button type="button" class="btn btn-success">@Html.ActionLink("Add Album", "Create")</button>
-
 </body>
 </html>
 
@@ -67,4 +66,4 @@
                     .PageSize(20)
                     .Read(read => read.Action("ListAlbums", "Albums"))
                  )
-)
+)*@

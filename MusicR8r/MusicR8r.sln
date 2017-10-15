@@ -17,14 +17,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicR8r.Services", "MusicR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Tests", "Services.Tests\Services.Tests.csproj", "{DA1E5DED-E5E7-41E2-842E-DA9A11981DC0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTestingMetrics", "UnitTestingMetrics", "{9F78234E-C170-46FD-95BD-5D63F29B503F}"
-	ProjectSection(SolutionItems) = preProject
-		GenerateUnitTestMetrics.bat = GenerateUnitTestMetrics.bat
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers.Tests", "Controllers.Tests\Controllers.Tests.csproj", "{20EC1BE5-7A6B-4B45-A41B-CBE3E5D29675}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicR8r.Web", "MusicR8r\MusicR8r.Web.csproj", "{C387CEA4-66F2-4292-AD2A-9934F7B64A5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{717FE363-5B70-4275-92A6-BC6C146E2DEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicR8r.AuthProvider", "AuthProvider\MusicR8r.AuthProvider.csproj", "{AB26168C-0A84-480A-BEFC-257315CCB9D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +55,10 @@ Global
 		{C387CEA4-66F2-4292-AD2A-9934F7B64A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C387CEA4-66F2-4292-AD2A-9934F7B64A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C387CEA4-66F2-4292-AD2A-9934F7B64A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB26168C-0A84-480A-BEFC-257315CCB9D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB26168C-0A84-480A-BEFC-257315CCB9D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB26168C-0A84-480A-BEFC-257315CCB9D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB26168C-0A84-480A-BEFC-257315CCB9D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,5 +69,6 @@ Global
 		{E4018C8F-EC9A-4F17-8DBC-9AF92A6214A0} = {36282884-0653-47E2-B656-2846F66AD947}
 		{DA1E5DED-E5E7-41E2-842E-DA9A11981DC0} = {7DE2A069-2FFA-4044-AB4A-D09256460276}
 		{20EC1BE5-7A6B-4B45-A41B-CBE3E5D29675} = {7DE2A069-2FFA-4044-AB4A-D09256460276}
+		{AB26168C-0A84-480A-BEFC-257315CCB9D9} = {717FE363-5B70-4275-92A6-BC6C146E2DEE}
 	EndGlobalSection
 EndGlobal

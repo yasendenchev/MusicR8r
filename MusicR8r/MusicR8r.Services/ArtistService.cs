@@ -57,8 +57,9 @@ namespace MusicR8r.Services
         //    return artists;
         //}
 
-        public void AddArtist(Artist artist)
+        public void AddArtist(string name, string countryOfOrigin, string bio)
         {
+            var artist = new Artist(name, countryOfOrigin, bio);
             this.artistRepository.Add(artist);
             this.saveContext.Commit();
         }

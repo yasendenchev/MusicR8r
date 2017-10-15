@@ -77,8 +77,7 @@ namespace MusicR8r.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var artist = new Artist(addArtistViewModel.Name, addArtistViewModel.CountryOfOrigin, addArtistViewModel.Bio);
-                this.artistService.AddArtist(artist);
+                this.artistService.AddArtist(addArtistViewModel.Name, addArtistViewModel.CountryOfOrigin, addArtistViewModel.Bio);
                 return RedirectToAction("Index");
             }
 

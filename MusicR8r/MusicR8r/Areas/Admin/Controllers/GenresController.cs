@@ -20,6 +20,7 @@ using System.Text.RegularExpressions;
 
 namespace MusicR8r.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class GenresController : Controller
     {
         private readonly IGenreService genreService;
@@ -43,7 +44,7 @@ namespace MusicR8r.Areas.Admin.Controllers
         {
             var genres = this.genreService.GetAll();
 
-            var models = genres.ProjectTo<GenreViewModel>().AsEnumerable();
+            var models = genres.ProjectTo<GenreViewModel>().ToList();
             DataSourceResult result = await models.ToDataSourceResultAsync(request);
             return Json(result);
         }
@@ -61,24 +62,23 @@ namespace MusicR8r.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AcceptVerbs(HttpVerbs.Post)]
-        //[ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Name")] GenreViewModel genreViewModel)
         {
-            //if (string.IsNullOrEmpty(addGenreViewModel.Name))
-            //{
-            //    ModelState.AddModelError("Name", "Name is required");
-            //}
+            if (string.IsNullOrEmpty(genreViewModel.Name))
+            {
+                ModelState.AddModelError("Name", "Name is required");
+            }
 
-            //if (Regex.IsMatch(addGenreViewModel.Name, "^[A-Z][-a-zA-Z]+$"))
-            //{
-            //    ModelState.AddModelError("Name", "Name must contain only letters");
-            //}
+            if (Regex.IsMatch(genreViewModel.Name, "^[A-Z][-a-zA-Z]+$"))
+            {
+                ModelState.AddModelError("Name", "Name must contain only letters");
+            }
 
             if (ModelState.IsValid)
             {
                 this.genreService.AddGenre(genreViewModel.Name);
                
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
 
             return View(genreViewModel);

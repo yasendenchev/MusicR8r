@@ -15,15 +15,20 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 ### Fix add Services on every model!!!!
 ### Implement Albums Controller!!!!
 
-### Continuous integration
+
+
+### Continuous integration - Done
 ### Unit testing
-### AJAX form / or SignalR
+### Submit AJAX form / or SignalR
 ### Sections and partial views
 ### Security holes prevention
 ### Error handling and Data validation
 #### Server-side
 #### Client-side
-### Admin area
+### Admin area - Done
+
+### Files check and eventually refactor
+
 1) genres
 2) albums
 3) artists

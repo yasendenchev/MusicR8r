@@ -4,6 +4,7 @@ using MusicR8r.Data.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,32 @@ namespace MusicR8r.Data
         public override int SaveChanges()
         {
             this.ApplyAuditInfoRules();
-            return base.SaveChanges();
+
+            try
+            {
+                return base.SaveChanges();
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                Exception raise = e;
+                foreach (var validationErrors in e.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting
+                        // the current instance as InnerException
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+
+
+            }
+
+            return -1;
         }
 
         private void ApplyAuditInfoRules()
@@ -57,7 +83,5 @@ namespace MusicR8r.Data
         {
             return new MsSqlDbContext();
         }
-
-        //public System.Data.Entity.DbSet<MusicR8r.Areas.Admin.Models.AlbumViewModel> AlbumViewModels { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace MusicR8r.Data
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _123 : IMigrationMetadata
+    public sealed partial class inittttttt : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_123));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(inittttttt));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710101931391_123"; }
+            get { return "201710142220539_inittttttt"; }
         }
         
         string IMigrationMetadata.Source

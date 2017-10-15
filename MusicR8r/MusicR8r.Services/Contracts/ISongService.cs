@@ -11,13 +11,13 @@ namespace MusicR8r.Services.Contracts
 
           IQueryable<Song> GetAllAndDeleted();
 
-          void Add(Song song);
+          void AddSong(string name, int duration, Guid genreId, Guid albumId);
 
           Song GetById(Guid songId);
 
           IQueryable<Song> GetByAlbum(Guid albumId);
 
-          void Update(Guid songId, string songName, int songDuration, string songBio);
+          void Update(Guid songId, Guid genreId, string songName, int songDuration);
 
           void DeleteById(Guid songId);
 

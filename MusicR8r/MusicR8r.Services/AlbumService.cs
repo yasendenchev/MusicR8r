@@ -12,14 +12,20 @@ namespace MusicR8r.Services
     {
         private const string argNullMessage = "cannot be null.";
         private readonly IEfRepository<Album> albumRepository;
+        private readonly IEfRepository<Artist> artistRepository;
         private readonly ISaveContext saveContext;
         private readonly IDateTimeProvider dateTimeProvider;
 
-        public AlbumService(IEfRepository<Album> albumRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider)
+        public AlbumService(IEfRepository<Album> albumRepository, IEfRepository<Artist> artistRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider)
         {
             if (albumRepository == null)
             {
                 throw new ArgumentNullException(String.Format("AlbumRepository" + argNullMessage));
+            }
+
+            if (artistRepository == null)
+            {
+                throw new ArgumentNullException(String.Format("ArtistRepository" + argNullMessage));
             }
 
             if (saveContext == null)
@@ -33,6 +39,7 @@ namespace MusicR8r.Services
             }
 
             this.albumRepository = albumRepository;
+            this.artistRepository = artistRepository;
             this.saveContext = saveContext;
             this.dateTimeProvider = dateTimeProvider;
         }
@@ -53,7 +60,7 @@ namespace MusicR8r.Services
             //
             //
             //
-            var artist = this.albumRepository.All.FirstOrDefault(a => a.Artist.Id.Equals(artistId)).Artist;
+            var artist = this.artistRepository.GetById(artistId);
             var album = new Album(name, year, artist);
             this.albumRepository.Add(album);
             this.saveContext.Commit();
@@ -114,17 +121,17 @@ namespace MusicR8r.Services
         public IQueryable<Album> Search(string searchParameter)
         {
             //var albumsByGenre = this.albumRepository.All.Where(p => p.Songs.Any(s => s.Genres.Any(g => g.Name == parameter)));
-            var albums = this.albumRepository.All
-                .Where(album =>
-                    album.Artist.Name.Contains(searchParameter))
-                .Where(album =>
-                    album.Songs.Any(song =>
-                        song.Genres.Any(genre =>
-                            genre.Name.Contains(searchParameter))))
-                .Where(album =>
-                    album.Name.Contains(searchParameter));
+            //var albums = this.albumRepository.All
+            //    .Where(album =>
+            //        album.Artist.Name.Contains(searchParameter))
+            //    .Where(album =>
+            //        album.Songs.Any(song =>
+            //            song.Genres.Any(genre =>
+            //                genre.Name.Contains(searchParameter))))
+            //    .Where(album =>
+            //        album.Name.Contains(searchParameter));
 
-            return albums;
+            return null;
         }
     }
 }

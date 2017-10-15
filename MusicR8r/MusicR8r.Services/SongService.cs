@@ -15,11 +15,14 @@ namespace MusicR8r.Services
     {
         private const string argNullMessage = "cannot be null.";
         private readonly IEfRepository<Song> songRepository;
+        private readonly IEfRepository<Album> albumRepository;
+        private readonly IEfRepository<Artist> artistRepository;
+        private readonly IEfRepository<Genre> genreRepository;
         private readonly ISaveContext saveContext;
         private readonly IDateTimeProvider dateTimeProvider;
 
 
-        public SongService(IEfRepository<Song> songRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider)
+        public SongService(IEfRepository<Song> songRepository, IEfRepository<Album> albumRepository, IEfRepository<Genre> genreRepository, IEfRepository<Artist> artistRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider)
         {
             if (songRepository == null)
             {
@@ -36,7 +39,10 @@ namespace MusicR8r.Services
                 throw new ArgumentNullException(String.Format("DateTimeProvider" + argNullMessage));
             }
 
+            this.genreRepository = genreRepository;
             this.songRepository = songRepository;
+            this.albumRepository = albumRepository;
+            this.artistRepository = artistRepository;
             this.saveContext = saveContext;
             this.dateTimeProvider = dateTimeProvider;
         }
@@ -53,8 +59,12 @@ namespace MusicR8r.Services
             return songs;
         }
 
-        public void Add(Song song)
+        public void AddSong(string name, int duration, Guid genreId, Guid albumId)
         {
+            var genre = this.genreRepository.GetById(genreId);
+            var album = this.albumRepository.GetById(albumId);
+            var artist = album.Artist;
+            var song = new Song(name, duration, artist, album, genre);
             this.songRepository.Add(song);
             this.saveContext.Commit();
         }
@@ -66,18 +76,17 @@ namespace MusicR8r.Services
 
         public IQueryable<Song> GetByAlbum(Guid albumId)
         {
-           return this.songRepository.All.Where(song => song.Album.Id.Equals(albumId));
+            return this.songRepository.All.Where(song => song.Album.Id.Equals(albumId));
         }
 
         //Not sure if it will be put to use
-        public void Update(Guid songId, string songName, int songDuration, string songBio)
+        public void Update(Guid songId, Guid genreId, string songName, int songDuration)
         {
+            var genre = this.genreRepository.GetById(genreId);
             var song = this.songRepository.GetById(songId);
             song.Name = songName;
             song.Duration = songDuration;
-            //song.Genres
-            //song.Artist
-
+            song.Genre = genre;
 
             this.songRepository.Update(song);
             this.saveContext.Commit();

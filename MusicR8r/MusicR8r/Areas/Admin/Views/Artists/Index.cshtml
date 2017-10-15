@@ -41,8 +41,8 @@
                 .Name("Grid")
                 .Columns(columns =>
                 {
-                columns.Bound(p => p.Name).Title("Artist name").Width("20%");
-                columns.Bound(p => p.Bio).Width("25%");
+                columns.Bound(a => a.Name).Title("Artist name").Width("20%");
+                columns.Bound(a => a.Bio).Width("25%");
                 //columns.Bound(artist => artist.Albums.Count()).Title("Albums").Width("25%");
                 columns.Template(@<text>
         @Html.ActionLink("Details", "Details", "Artists", new { id = @item.Id }, new { @class = "k-button" })
@@ -57,9 +57,7 @@
                     </text>)
             .ClientTemplate(@Html.ActionLink("Delete", "Delete", "Artists", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
                     //@Html.ActionLink("Albums", "GetByArtist", "Album", new { id = Model.Id })
-                    columns.Template(@<text>
-    @Html.ActionLink("Albums", "All", "Albums", new { id = @item.Id }, new { @class = "k-button" })
-                    </text>)
+                    columns.Template(@<text>Albums</text>)
             .ClientTemplate(@Html.ActionLink("Albums", "All", "Albums", new { artistId = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
                 })
                 .Pageable()

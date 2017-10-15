@@ -1,0 +1,15 @@
+﻿a {
+    color: white;
+}
+
+    a:hover {
+        color: white;
+    }
+
+button > a:hover {
+    text-decoration: none;
+}
+
+button > a {
+    font-size: x-large
+}

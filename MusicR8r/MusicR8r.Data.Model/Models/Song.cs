@@ -6,16 +6,15 @@ namespace MusicR8r.Data.Model.Models
     {
         public Song()
         {
-            this.Genres = new HashSet<Genre>();
         }
 
-        public Song(string name, int duration, Artist artist, Album album)
+        public Song(string name, int duration, Artist artist, Album album, Genre genre)
         {
-            this.Genres = new HashSet<Genre>();
             this.Name = name;
             this.Duration = duration;
             this.Artist = artist;
             this.Album = album;
+            this.Genre = genre;
         }
         
         public string Name { get; set; }
@@ -26,6 +25,6 @@ namespace MusicR8r.Data.Model.Models
 
         public Album Album { get; set; }
 
-        public virtual ICollection<Genre> Genres { get; set; }
+        public virtual Genre Genre { get; set; }
     }
 }

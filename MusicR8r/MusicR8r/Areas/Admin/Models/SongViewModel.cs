@@ -1,0 +1,35 @@
+﻿using AutoMapper;
+using MusicR8r.Data.Model.Models;
+using MusicR8r.Infrastructure;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
+namespace MusicR8r.Areas.Admin.Models
+{
+    public class SongViewModel : IMapFrom<Song>, ICustomMappings
+    {
+        public Guid Id { get; set; }
+
+        // TODO: remove
+        [Required(ErrorMessage = "Name is required!")]
+        public string Name { get; set; }
+
+        public int Minutes { get; set; }
+
+        public int Seconds { get; set; }
+
+        public string Genre { get; set; }
+
+        public void CreateMappings(IMapperConfigurationExpression configuration)
+        {
+            configuration.CreateMap<Song, SongViewModel>()
+            .ForMember(songViewModel => songViewModel.Name, cfg => cfg.MapFrom(song => song.Name))
+            .ForMember(songViewModel => songViewModel.Genre, cfg => cfg.MapFrom(song => song.Genre.Name))
+                .ForMember(songViewModel => songViewModel.Minutes, cfg => cfg.MapFrom(song => song.Duration / 60))
+                .ForMember(songViewModel => songViewModel.Seconds, cfg => cfg.MapFrom(song => song.Duration % 60));
+        }
+    }
+}

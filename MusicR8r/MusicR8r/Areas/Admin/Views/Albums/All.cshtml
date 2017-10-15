@@ -1,40 +1,65 @@
 ﻿@model IEnumerable<MusicR8r.Areas.Admin.Models.AlbumViewModel>
+@using Kendo.Mvc.UI;
 
 @{
-    ViewBag.Title = "GetByArtist";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@*Model.First().ArtistName Albums*@</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Year)
-        </th>
-        <th></th>
-    </tr>
+<!DOCTYPE html>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Year)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        a {
+            color: white;
+        }
 
-</table>
+            a:hover {
+                color: white;
+            }
+
+        button > a:hover {
+            text-decoration: none;
+        }
+
+        button > a {
+            font-size: x-large
+        }
+    </style>
+</head>
+<body>
+    <button type="button" class="btn btn-success">@Html.ActionLink("Add Album", "Create")</button>
+
+</body>
+</html>
+
+@(Html.Kendo().Grid(Model)
+                .Name("Grid")
+                .Columns(columns =>
+                {
+                columns.Bound(album => album.Name).Title("Album name").Width("20%");
+                columns.Bound(album => album.Year).Width("25%");
+                columns.Bound(album => album.ArtistName).Title("Artist").Width("25%");
+                columns.Template(@<text>Details</text>)
+                    .ClientTemplate(@Html.ActionLink("Details", "Details", "Albums", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
+                columns.Template(@<text>Edit</text>)
+                    .ClientTemplate(@Html.ActionLink("Edit", "Edit", "Albums", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
+                columns.Template(@<text>Delete</text>)
+                    .ClientTemplate(@Html.ActionLink("Delete", "Delete", "Albums", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
+                columns.Template(@<text>Songs</text>)
+                    .ClientTemplate(@Html.ActionLink("Songs", "All", "Songs", new { albumId = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
+                })
+                .Pageable()
+                .Sortable()
+                .HtmlAttributes(new { style = "height:70%;" })
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .PageSize(20)
+                    .Read(read => read.Action("ListAlbums", "Albums", new { artistId = ViewContext.RouteData.Values["artistId"] }))
+                 )
+)
+
+

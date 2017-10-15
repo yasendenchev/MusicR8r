@@ -1,18 +1,22 @@
-﻿using System;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
-using Owin;
-using MusicR8r.Models;
 using MusicR8r.Data;
 using MusicR8r.Data.Model.Models;
+using Owin;
+using System;
 
-namespace MusicR8r
+[assembly: OwinStartupAttribute(typeof(MusicR8r.AuthProvider.Startup))]
+namespace MusicR8r.AuthProvider
 {
     public partial class Startup
     {
+        public void Configuration(IAppBuilder app)
+        {
+            ConfigureAuth(app);
+        }
+
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -36,7 +40,7 @@ namespace MusicR8r
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.

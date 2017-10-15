@@ -7,11 +7,9 @@ namespace MusicR8r.Contracts.Services
 {
     public interface IArtistService : IService
     {
-        void AddArtist(Artist artist);
+        void AddArtist(string name, string countryOfOrigin, string bio);
 
         IQueryable<Artist> GetAll();
-
-        //IQueryable<Artist> GetAllAndDeleted();
 
         Artist GetById(Guid artistId);
 

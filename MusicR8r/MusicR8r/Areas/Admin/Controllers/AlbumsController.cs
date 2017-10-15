@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using MusicR8r.Areas.Admin.Models;
-using MusicR8r.Data;
-using MusicR8r.Services.Providers;
-using AutoMapper;
-using Kendo.Mvc.UI;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using MusicR8r.Areas.Admin.Models;
 using MusicR8r.Data.Model.Models;
+using MusicR8r.Services.Providers;
+using System;
+using System.Data;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace MusicR8r.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AlbumsController : Controller
     {
         private readonly IAlbumService albumService;
@@ -29,20 +26,21 @@ namespace MusicR8r.Areas.Admin.Controllers
             this.mapper = mapper;
         }
 
-        //// GET: Admin/Album
-        //public ActionResult All()
-        //{
-        //    return View();
-        //}
+        // GET: Admin/Album
+        public ActionResult All()
+        {
+            return View();
+        }
 
-        //public async Task<ActionResult> ListAlbums([DataSourceRequest] DataSourceRequest request)
-        //{
-        //    var albums = this.albumService.GetAll();
+        public async Task<ActionResult> ListAlbums([DataSourceRequest] DataSourceRequest request, Guid artistId)
+        {
+            var albums = this.albumService.GetByArtist(artistId);
 
-        //    var models = albums.ProjectTo<AlbumViewModel>().AsEnumerable();
-        //    DataSourceResult result = await models.ToDataSourceResultAsync(request);
-        //    return Json(result);
-        //}
+            var models = albums.ProjectTo<AlbumViewModel>().AsEnumerable();
+            DataSourceResult result = await models.ToDataSourceResultAsync(request);
+            var json = Json(result, JsonRequestBehavior.AllowGet);
+            return json;
+        }
 
         // GET: Admin/Album/Details/5
         public ActionResult Details(Guid? id)
@@ -86,29 +84,30 @@ namespace MusicR8r.Areas.Admin.Controllers
             return View(albumViewModel);
         }
 
-        public ActionResult All(Guid? artistId)
-        {
-            if (artistId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        //public ActionResult All(Guid? artistId)
+        //{
+        //    if (artistId == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
 
-            IQueryable<Album> albums = this.albumService.GetByArtist((Guid)artistId);
-
-
-            if (albums == null)
-            {
-                return HttpNotFound();
-            }
-
-            var albumViewModel = albums.ProjectTo<AlbumViewModel>().AsEnumerable();
-
-            return View(albumViewModel);
+        //    IQueryable<Album> albums = this.albumService.GetByArtist((Guid)artistId);
 
 
-        }
+        //    if (albums == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    var albumViewModel = albums.ProjectTo<AlbumViewModel>().AsEnumerable();
+
+        //    return View(albumViewModel);
+
+
+        //}
 
         // GET: Admin/Album/Edit/5
+
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
