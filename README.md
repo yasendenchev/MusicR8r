@@ -67,6 +67,7 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 
 ### Error handling and Data validation
 #### Server-side
+##### - DataAnnotations
 #### Client-side
 
 ### Admin area - Done
