@@ -5,42 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    <style>
-        a {
-            color: white;
-        }
-
-            a:hover {
-                color: white;
-            }
-
-        button > a:hover {
-            text-decoration: none;
-        }
-
-        button > a {
-            font-size: x-large
-        }
-    </style>
+    @Styles.Render("~/ Content / items - list - styles.css")
 </head>
 <body>
     <button type="button" class="btn btn-success">@Html.ActionLink("Add Album", "Create")</button>
-
-</body>
-</html>
-
-@(Html.Kendo().Grid(Model)
+    @(Html.Kendo().Grid(Model)
                 .Name("Grid")
                 .Columns(columns =>
                 {
-                columns.Bound(album => album.Name).Title("Album name").Width("20%");
+                columns.Bound(album => album.Name).Title("Album name").Width("20%").Hidden();
                 columns.Bound(album => album.Year).Width("25%");
                 columns.Bound(album => album.ArtistName).Title("Artist").Width("25%");
                 columns.Template(@<text>Details</text>)
@@ -53,6 +31,7 @@
                     .ClientTemplate(@Html.ActionLink("Songs", "All", "Songs", new { albumId = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
                 })
                 .Pageable()
+
                 .Sortable()
                 .HtmlAttributes(new { style = "height:70%;" })
                 .DataSource(dataSource => dataSource
@@ -60,6 +39,10 @@
                     .PageSize(20)
                     .Read(read => read.Action("ListAlbums", "Albums", new { artistId = ViewContext.RouteData.Values["artistId"] }))
                  )
-)
+    )
+</body>
+</html>
+
+
 
 

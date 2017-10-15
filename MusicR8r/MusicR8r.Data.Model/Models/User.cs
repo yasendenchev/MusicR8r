@@ -19,6 +19,20 @@ namespace MusicR8r.Data.Model.Models
             this.Albums = new HashSet<Album>();
         }
 
+        public User(string username)
+        {
+            this.UserName = username;
+        }
+
+        public User(string email, string username, string firstName, string lastName)
+            : this()
+        {
+            this.Email = email;
+            this.UserName = username;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+        }
+
         [Index]
         public bool IsDeleted { get; set; }
 

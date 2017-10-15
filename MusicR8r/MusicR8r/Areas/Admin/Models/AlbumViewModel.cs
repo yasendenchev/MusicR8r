@@ -14,7 +14,7 @@ namespace MusicR8r.Areas.Admin.Models
     {
         public Guid Id { get; set; }
 
-        [RegularExpression("[a-zA0]{3,15}", ErrorMessage = "Album name should contain only letters")]
+        //[RegularExpression("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*${3,15}", ErrorMessage = "Album name should contain only letters")]
         [Required(ErrorMessage = "Name is required!")]
         [AllowHtml]
         public string Name { get; set; }

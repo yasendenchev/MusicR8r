@@ -12,7 +12,11 @@ namespace MusicR8r
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+                name: "Profile",
+                url: "Profile/Details",
+                defaults: new {controller = "Profile", action = "Details"}
+                );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

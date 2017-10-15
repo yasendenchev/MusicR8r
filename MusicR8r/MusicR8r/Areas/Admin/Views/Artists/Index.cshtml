@@ -4,40 +4,18 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    <style>
-        a {
-            color: white;
-        }
-
-            a:hover {
-                color: white;
-            }
-
-        button > a:hover {
-            text-decoration: none;
-        }
-
-        button > a {
-            font-size: x-large
-        }
-    </style>
 </head>
 <body>
+    @Styles.RenderFormat("~/ Content / items - list - styles.css")
+
     <button type="button" class="btn btn-success">@Html.ActionLink("Add Artist", "Create")</button>
-
-</body>
-</html>
-
-
-@(Html.Kendo().Grid(Model)
+    @(Html.Kendo().Grid(Model)
                 .Name("Grid")
                 .Columns(columns =>
                 {
@@ -46,14 +24,14 @@
                 //columns.Bound(artist => artist.Albums.Count()).Title("Albums").Width("25%");
                 columns.Template(@<text>
         @Html.ActionLink("Details", "Details", "Artists", new { id = @item.Id }, new { @class = "k-button" })
-                    </text>)
+                </text>)
             .ClientTemplate(@Html.ActionLink("Details", "Details", "Artists", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
                     columns.Template(@<text>
-                        @Html.ActionLink("Edit", "Edit", "Artists", new { id = @item.Id }, new { @class = "k-button" })
+        @Html.ActionLink("Edit", "Edit", "Artists", new { id = @item.Id }, new { @class = "k-button" })
                     </text>)
             .ClientTemplate(@Html.ActionLink("Edit", "Edit", "Artists", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
                     columns.Template(@<text>
-                        @Html.ActionLink("Delete", "Delete", "Artists", new { id = @item.Id }, new { @class = "k-button" })
+        @Html.ActionLink("Delete", "Delete", "Artists", new { id = @item.Id }, new { @class = "k-button" })
                     </text>)
             .ClientTemplate(@Html.ActionLink("Delete", "Delete", "Artists", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
                     //@Html.ActionLink("Albums", "GetByArtist", "Album", new { id = Model.Id })
@@ -68,4 +46,8 @@
                     .PageSize(20)
                     .Read(read => read.Action("ListArtists", "Artists"))
                  )
-)
+    )
+</body>
+</html>
+
+

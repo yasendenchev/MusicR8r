@@ -14,18 +14,59 @@ MusicR8r is a website where people can write reviews about music albums/singles.
 ### Fix Artist, Albums, Songs Delete Services!!!!
 ### Remove business logic from all controlers!!!!
 ### Fix add Services on every model!!!!
-### Implement Albums Controller!!!!
+### Implement Albums Controller!!!! - done
+### Implement Public Songs Controller!!!
+
+### Remove user collection functionality
+
+
 
 
 
 ### Continuous integration - Done
+
 ### Unit testing
+#### Services
+##### Album
+##### Artist
+##### Song
+##### Genre
+##### User
+
+#### Services
+##### Album
+##### Artist
+##### Song
+##### Genre
+##### User
+
+#### Controllers
+##### Private
+###### Album
+###### Artist
+###### Song
+###### Genre
+###### User
+
+##### Public
+###### Album
+###### Artist
+###### Song
+###### Genre
+###### User
+
 ### Submit AJAX form / or SignalR
+#### Implement chat
+
 ### Sections and partial views
+
 ### Security holes prevention
+#### Add AntiForgeryTokenAttribute!!!
+
 ### Error handling and Data validation
 #### Server-side
 #### Client-side
+
 ### Admin area - Done
 
 ### Files check and eventually refactor
