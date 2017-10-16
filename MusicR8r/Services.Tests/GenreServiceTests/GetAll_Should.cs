@@ -1,7 +1,7 @@
 ﻿using Moq;
 using MusicR8r.Data.Model.Models;
 using MusicR8r.Data.Repositories;
-using MusicR8r.Data.SaveContext;
+using MusicR8r.Data.UnitOfWork;
 using MusicR8r.Services;
 using MusicR8r.Services.Providers;
 using NUnit.Framework;
@@ -20,9 +20,9 @@ namespace Services.Tests.GenreServiceTest
         public void CallRepositoryAll_WhenInvoked()
         {
             var repositoryMock = new Mock<IEfRepository<Genre>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var datetimeMock = new Mock<IDateTimeProvider>();
-            var service = new GenreService(repositoryMock.Object, saveContextMock.Object, datetimeMock.Object);
+            var service = new GenreService(repositoryMock.Object, unitOfWorkMock.Object, datetimeMock.Object);
 
             service.GetAll();
 
@@ -36,9 +36,9 @@ namespace Services.Tests.GenreServiceTest
             var genre2 = new Genre("Rap");
             var genres = new List<Genre> { genre1, genre2 }.AsQueryable();
             var repositoryMock = new Mock<IEfRepository<Genre>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var datetimeMock = new Mock<IDateTimeProvider>();
-            var service = new GenreService(repositoryMock.Object, saveContextMock.Object, datetimeMock.Object);
+            var service = new GenreService(repositoryMock.Object, unitOfWorkMock.Object, datetimeMock.Object);
 
             repositoryMock.Setup(r => r.All).Returns(genres);
 

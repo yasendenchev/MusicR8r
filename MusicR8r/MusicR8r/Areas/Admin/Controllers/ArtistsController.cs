@@ -21,17 +21,23 @@ namespace MusicR8r.Areas.Admin.Controllers
 
         public ArtistsController(IArtistService artistService, IMapper mapper)
         {
+            if (artistService == null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (mapper == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             this.artistService = artistService;
             this.mapper = mapper;
         }
 
         // GET: Admin/Artist
-        public ActionResult Index()
+        public ActionResult All()
         {
-            //var artists = this.artistService.GetAll();
-
-            //var models = artists.ProjectTo<ArtistViewModel>();
-            return View(/*models*/);
+            return View();
         }
 
         public async Task<ActionResult> ListArtists([DataSourceRequest] DataSourceRequest request)
@@ -73,12 +79,12 @@ namespace MusicR8r.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,CountryOfOrigin,Bio")] AddArtistViewModel addArtistViewModel)
+        public ActionResult Create([Bind(Include = "Name,CountryOfOrigin,Bio")] ArtistViewModel addArtistViewModel)
         {
             if (ModelState.IsValid)
             {
                 this.artistService.AddArtist(addArtistViewModel.Name, addArtistViewModel.CountryOfOrigin, addArtistViewModel.Bio);
-                return RedirectToAction("Index");
+                return RedirectToAction("All");
             }
 
             return View(addArtistViewModel);
@@ -145,16 +151,7 @@ namespace MusicR8r.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             this.artistService.DeleteById(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("All");
         }
-
-        //        protected override void Dispose(bool disposing)
-        //        {
-        //            if (disposing)
-        //            {
-        //                db.Dispose();
-        //            }
-        //            base.Dispose(disposing);
-        //        }
     }
 }

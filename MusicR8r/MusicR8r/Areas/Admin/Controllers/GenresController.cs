@@ -28,14 +28,20 @@ namespace MusicR8r.Areas.Admin.Controllers
 
         public GenresController(IGenreService genreService, IMapper mapper)
         {
+            if (genreService == null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (mapper == null)
+            {
+                throw new ArgumentNullException();
+            }
             this.genreService = genreService;
             this.mapper = mapper;
         }
 
-        //private MsSqlDbContext db = new MsSqlDbContext();
-
         // GET: Admin/Genre
-        public ActionResult Index()
+        public ActionResult All()
         {
             return View();
         }
@@ -77,8 +83,8 @@ namespace MusicR8r.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 this.genreService.AddGenre(genreViewModel.Name);
-               
-                //return RedirectToAction("Index");
+
+                return RedirectToAction("All");
             }
 
             return View(genreViewModel);
@@ -111,16 +117,7 @@ namespace MusicR8r.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             this.genreService.DeleteById(id);
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                //this.genreService
-            }
-            base.Dispose(disposing);
+            return RedirectToAction("All");
         }
     }
 }

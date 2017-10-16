@@ -14,12 +14,14 @@ namespace MusicR8r.Areas.Admin.Models
     {
         public Guid Id { get; set; }
 
-        //[RegularExpression("^[A-Z0-9 _]*[A-Z0-9][A-Z0-9 _]*${3,15}", ErrorMessage = "Album name should contain only letters")]
-        [Required(ErrorMessage = "Name is required!")]
-        [AllowHtml]
+        [RegularExpression("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*${3,15}", ErrorMessage = "The name can contain only letters, digits and whitespaces")]
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Year is required!")]
+        [Required(ErrorMessage = "Year is required")]
+        [Range(1850, 2020, ErrorMessage = "Please enter valid Year")]
+        [Display(Name = "Year")]
         public int Year { get; set; }
 
         public string ArtistName { get; set; }

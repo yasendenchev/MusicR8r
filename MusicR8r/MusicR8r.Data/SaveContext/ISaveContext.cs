@@ -1,6 +1,6 @@
-﻿namespace MusicR8r.Data.SaveContext
+﻿namespace MusicR8r.Data.UnitOfWork
 {
-    public interface ISaveContext
+    public interface IUnitOfWork
     {
         void Commit();
     }

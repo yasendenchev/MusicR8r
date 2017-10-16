@@ -83,5 +83,7 @@ namespace MusicR8r.Data
         {
             return new MsSqlDbContext();
         }
+
+        //public System.Data.Entity.DbSet<MusicR8r.Models.SongViewModel> SongViewModels { get; set; }
     }
 }

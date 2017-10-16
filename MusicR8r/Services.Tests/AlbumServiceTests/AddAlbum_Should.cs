@@ -7,7 +7,7 @@ using Moq;
 using NUnit.Framework;
 using MusicR8r.Data.Repositories;
 using MusicR8r.Data.Model.Models;
-using MusicR8r.Data.SaveContext;
+using MusicR8r.Data.UnitOfWork;
 using MusicR8r.Services;
 using MusicR8r.Services.Providers;
 
@@ -18,14 +18,13 @@ namespace Services.Tests.AlbumServiceTests
     {
         
         [Test]
-        [Ignore("Null reference because of invalid query")]
         public void CallRepositoryAdd_WhenInvoked()
         {
             var repositoryMock = new Mock<IEfRepository<Album>>();
             var repositoryArtistMock = new Mock<IEfRepository<Artist>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var dateTimeProvider = new Mock<IDateTimeProvider>();
-            var service = new AlbumService(repositoryMock.Object, repositoryArtistMock.Object, saveContextMock.Object, dateTimeProvider.Object);
+            var service = new AlbumService(repositoryMock.Object, repositoryArtistMock.Object, unitOfWorkMock.Object, dateTimeProvider.Object);
             var name = "AlbumName";
             var year = 1998;
             var guid = Guid.NewGuid();
@@ -36,34 +35,21 @@ namespace Services.Tests.AlbumServiceTests
 
         }
 
-        //[Test]
-        //public void CallRepositoryAll_WhenInvoked()
-        //{
-        //    var repositoryMock = new Mock<IEfRepository<Album>>();
-        //    var saveContextMock = new Mock<ISaveContext>();
-        //    var dateTimeProvider = new Mock<IDateTimeProvider>();
-        //    var service = new AlbumService(repositoryMock.Object, saveContextMock.Object, dateTimeProvider.Object);
-
-        //}
-
         [Test]
-        [Ignore("Null reference because of invalid query")]
-        public void CallSaveContextCommit_WhenInvoked()
+        public void CallUnitOfWorkCommit_WhenInvoked()
         {
             var repositoryMock = new Mock<IEfRepository<Album>>();
             var repositoryArtistMock = new Mock<IEfRepository<Artist>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var dateTimeProvider = new Mock<IDateTimeProvider>();
-            var service = new AlbumService(repositoryMock.Object, repositoryArtistMock.Object, saveContextMock.Object, dateTimeProvider.Object);
+            var service = new AlbumService(repositoryMock.Object, repositoryArtistMock.Object, unitOfWorkMock.Object, dateTimeProvider.Object);
             var name = "AlbumName";
             var year = 1998;
             var guid = Guid.NewGuid();
 
             service.AddAlbum(name, year, guid);
 
-            saveContextMock.Verify(s => s.Commit(), Times.Once);
+            unitOfWorkMock.Verify(s => s.Commit(), Times.Once);
         }
-
-
     }
 }

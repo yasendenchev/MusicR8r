@@ -13,14 +13,26 @@ namespace MusicR8r
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
+                "Albums_Songs",
+                "Albums/{albumId}/Songs/{action}/{id}",
+                new { controller = "Songs", action = "All", id = UrlParameter.Optional },
+                namespaces: new string[] { "MusicR8r.Controllers" }
+                );
+            routes.MapRoute(
                 name: "Profile",
                 url: "Profile/Details",
-                defaults: new {controller = "Profile", action = "Details"}
+                defaults: new { controller = "Profile", action = "Details" }
                 );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new string[] { "MusicR8r.Controllers" }
+            );
+            routes.MapRoute(
+                name: "EditProfile",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Profile", action = "Edit", id = UrlParameter.Optional },
                 namespaces: new string[] { "MusicR8r.Controllers" }
             );
         }

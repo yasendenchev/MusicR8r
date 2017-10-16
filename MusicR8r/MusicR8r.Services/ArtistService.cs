@@ -1,7 +1,7 @@
 ﻿using MusicR8r.Contracts.Services;
 using MusicR8r.Data.Model.Models;
 using MusicR8r.Data.Repositories;
-using MusicR8r.Data.SaveContext;
+using MusicR8r.Data.UnitOfWork;
 using MusicR8r.Services.Providers;
 using System;
 using System.Linq;
@@ -12,21 +12,21 @@ namespace MusicR8r.Services
     {
         private const string argNullMessage = "cannot be null.";
         private readonly IEfRepository<Artist> artistRepository;
-        private readonly ISaveContext saveContext;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IDateTimeProvider dateTimeProvider;
         private readonly IAlbumService albumService;
 
 
-        public ArtistService(IEfRepository<Artist> artistRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider, IAlbumService albumService)
+        public ArtistService(IEfRepository<Artist> artistRepository, IUnitOfWork unitOfWork, IDateTimeProvider dateTimeProvider, IAlbumService albumService)
         {
             if (artistRepository == null)
             {
                 throw new ArgumentNullException(String.Format("ArtistRepository" + argNullMessage));
             }
 
-            if (saveContext == null)
+            if (unitOfWork == null)
             {
-                throw new ArgumentNullException(String.Format("SaveContext" + argNullMessage));
+                throw new ArgumentNullException(String.Format("UnitOfWork" + argNullMessage));
             }
 
             if (dateTimeProvider == null)
@@ -34,13 +34,13 @@ namespace MusicR8r.Services
                 throw new ArgumentNullException(String.Format("DateTimeProvider" + argNullMessage));
             }
 
-            if (dateTimeProvider == null)
+            if (albumService == null)
             {
                 throw new ArgumentNullException(String.Format("AlbumService" + argNullMessage));
             }
 
             this.artistRepository = artistRepository;
-            this.saveContext = saveContext;
+            this.unitOfWork = unitOfWork;
             this.dateTimeProvider = dateTimeProvider;
             this.albumService = albumService;
         }
@@ -51,17 +51,11 @@ namespace MusicR8r.Services
             return artists;
         }
 
-        //public IQueryable<Artist> GetAllAndDeleted()
-        //{
-        //    IQueryable<Artist> artists = this.artistRepository.AllAndDeleted;
-        //    return artists;
-        //}
-
         public void AddArtist(string name, string countryOfOrigin, string bio)
         {
             var artist = new Artist(name, countryOfOrigin, bio);
             this.artistRepository.Add(artist);
-            this.saveContext.Commit();
+            this.unitOfWork.Commit();
         }
 
         public Artist GetById(Guid artistId)
@@ -78,7 +72,7 @@ namespace MusicR8r.Services
             artist.Bio = artistBio;
 
             this.artistRepository.Update(artist);
-            this.saveContext.Commit();
+            this.unitOfWork.Commit();
         }
 
         public void DeleteById(Guid artistId)
@@ -100,7 +94,7 @@ namespace MusicR8r.Services
                 artist.DeletedOn = this.dateTimeProvider.Now();
 
                 this.artistRepository.Update(artist);
-                this.saveContext.Commit();
+                this.unitOfWork.Commit();
             }
         }
     }

@@ -23,15 +23,18 @@ namespace MusicR8r.Controllers
 
         public ProfileController(IUserService userService, IMapper mapper)
         {
+            if(userService == null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (mapper == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             this.userService = userService;
             this.mapper = mapper;
         }
-
-        // GET: Profile
-        //public ActionResult Index()
-        //{
-        //    return View(/*db.ProfileViewModels.ToList()*/);
-        //}
 
         // GET: Profile/Details/5
         public ActionResult Details()
@@ -50,44 +53,21 @@ namespace MusicR8r.Controllers
             return View(profileViewModel);
         }
 
-        // GET: Profile/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
         public ActionResult AddAlbum(Guid albumId)
         {
             return null;
         }
 
-        // POST: Profile/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,Email,UserName,FirstName,LastName,FullName,Bio")] ProfileViewModel profileViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        profileViewModel.Id = Guid.NewGuid();
-        //        //db.ProfileViewModels.Add(profileViewModel);
-        //        //db.SaveChanges();
-        //        return RedirectToAction("Details");
-        //    }
-
-        //    return View(profileViewModel);
-        //}
-
         // GET: Profile/Edit/5
-        public ActionResult Edit(Guid? id)
+        public ActionResult Edit(Guid? userId)
         {
-            if (id == null)
+            if (userId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var user = this.userService.GetUserById((Guid)id);
+            var user = this.userService.GetUserById((Guid)userId);
+
             ProfileViewModel profileViewModel = this.mapper.Map<ProfileViewModel>(user);
 
             if (profileViewModel == null)
@@ -112,33 +92,6 @@ namespace MusicR8r.Controllers
             }
             return View(profileViewModel);
         }
-
-        // GET: Profile/Delete/5
-        //public ActionResult Delete(Guid? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var user = this.userService.GetUserById((Guid)id);
-        //    ProfileViewModel profileViewModel = this.mapper.Map<ProfileViewModel>(user);
-        //    if (profileViewModel == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(profileViewModel);
-        //}
-
-        // POST: Profile/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(Guid id)
-        //{
-        //    ProfileViewModel profileViewModel = null;
-        //    //db.ProfileViewModels.Remove(profileViewModel);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
 
         protected override void Dispose(bool disposing)
         {

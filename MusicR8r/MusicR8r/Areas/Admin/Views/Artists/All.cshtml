@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MusicR8r.Areas.Admin.Models.ArtistViewModel>
+@using Kendo.Mvc.UI;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @Styles.RenderFormat("~/ Content / items - list - styles.css")
+
+    <button type="button" class="btn btn-success">@Html.ActionLink("Add Artist", "Create")</button>
+    @(Html.Kendo().Grid(Model)
+                .Name("Grid")
+                .Columns(columns =>
+                {
+                columns.Bound(a => a.Name).Title("Artist name").Width("40%");
+                columns.Bound(a => a.Bio).Width("40%");
+                //columns.Bound(artist => artist.Albums.Count()).Title("Albums").Width("25%");
+                columns.Template(@<text>
+        @Html.ActionLink("Details", "Details", "Artists", new { id = @item.Id }, new { @class = "k-button" })
+                </text>)
+            .ClientTemplate(@Html.ActionLink("Details", "Details", "Artists", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("5%");
+                    columns.Template(@<text>
+        @Html.ActionLink("Edit", "Edit", "Artists", new { id = @item.Id }, new { @class = "k-button" })
+                    </text>)
+            .ClientTemplate(@Html.ActionLink("Edit", "Edit", "Artists", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("5%");
+                    columns.Template(@<text>
+        @Html.ActionLink("Delete", "Delete", "Artists", new { id = @item.Id }, new { @class = "k-button" })
+                    </text>)
+            .ClientTemplate(@Html.ActionLink("Delete", "Delete", "Artists", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("5%");
+                    //@Html.ActionLink("Albums", "GetByArtist", "Album", new { id = Model.Id })
+                    columns.Template(@<text>Albums</text>)
+            .ClientTemplate(@Html.ActionLink("Albums", "All", "Albums", new { artistId = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("5%");
+                })
+                .Pageable()
+                .Sortable()
+                .HtmlAttributes(new { style = "height:70%;" })
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .PageSize(20)
+                    .Read(read => read.Action("ListArtists", "Artists"))
+                 )
+    )
+</body>
+</html>
+
+

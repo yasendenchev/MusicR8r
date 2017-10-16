@@ -7,7 +7,7 @@ using Moq;
 using NUnit.Framework;
 using MusicR8r.Data.Repositories;
 using MusicR8r.Data.Model.Models;
-using MusicR8r.Data.SaveContext;
+using MusicR8r.Data.UnitOfWork;
 using MusicR8r.Services;
 using MusicR8r.Services.Providers;
 
@@ -20,9 +20,9 @@ namespace Services.Tests
         public void CallRepositoryAdd_WhenInvoked()
         {
             var repositoryMock = new Mock<IEfRepository<Genre>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var datetimeMock = new Mock<IDateTimeProvider>();
-            var service = new GenreService(repositoryMock.Object, saveContextMock.Object, datetimeMock.Object);
+            var service = new GenreService(repositoryMock.Object, unitOfWorkMock.Object, datetimeMock.Object);
             string name = "Rock";
             //Genre genre = new Genre(name);
 
@@ -32,18 +32,18 @@ namespace Services.Tests
         }
 
         [Test]
-        public void CallSaveContextCommit_WhenInvoked()
+        public void CallUnitOfWorkCommit_WhenInvoked()
         {
             var repositoryMock = new Mock<IEfRepository<Genre>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var datetimeMock = new Mock<IDateTimeProvider>();
-            var service = new GenreService(repositoryMock.Object, saveContextMock.Object, datetimeMock.Object);
+            var service = new GenreService(repositoryMock.Object, unitOfWorkMock.Object, datetimeMock.Object);
             string name = "Rock";
             //Genre genre = new Genre(name);
 
             service.AddGenre(name);
 
-            saveContextMock.Verify(s => s.Commit(), Times.Once);
+            unitOfWorkMock.Verify(s => s.Commit(), Times.Once);
         }
     }
 }

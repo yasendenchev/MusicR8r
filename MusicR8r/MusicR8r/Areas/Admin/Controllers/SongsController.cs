@@ -21,9 +21,21 @@ namespace MusicR8r.Areas.Admin.Controllers
         private readonly IGenreService genreService;
         private readonly IMapper mapper;
 
-        public SongsController(ISongService albumService, IGenreService genreService, IMapper mapper)
+        public SongsController(ISongService songService, IGenreService genreService, IMapper mapper)
         {
-            this.songService = albumService;
+            if (songService == null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (genreService == null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (mapper == null)
+            {
+                throw new ArgumentNullException();
+            }
+            this.songService = songService;
             this.genreService = genreService;
             this.mapper = mapper;
         }
@@ -141,15 +153,6 @@ namespace MusicR8r.Areas.Admin.Controllers
         {
             this.songService.DeleteById(id);
             return RedirectToAction("All");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                //db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

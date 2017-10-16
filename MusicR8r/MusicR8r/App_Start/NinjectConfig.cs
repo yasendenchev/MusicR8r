@@ -3,20 +3,18 @@
 
 namespace MusicR8r.App_Start
 {
-    using System;
-    using System.Web;
-
+    using AutoMapper;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
-    using Ninject;
-    using Ninject.Web.Common;
-    using Ninject.Extensions.Conventions;
-    using System.Data.Entity;
     using MusicR8r.Data;
     using MusicR8r.Data.Repositories;
+    using MusicR8r.Data.UnitOfWork;
     using MusicR8r.Services.Contracts;
-    using MusicR8r.Data.SaveContext;
-    using AutoMapper;
+    using Ninject;
+    using Ninject.Extensions.Conventions;
+    using Ninject.Web.Common;
+    using System;
+    using System.Data.Entity;
+    using System.Web;
 
     public static class NinjectConfig
     {
@@ -39,6 +37,7 @@ namespace MusicR8r.App_Start
         {
             bootstrapper.ShutDown();
         }
+        
 
         /// <summary>
         /// Creates the kernel that will manage your application.
@@ -82,10 +81,12 @@ namespace MusicR8r.App_Start
                  .SelectAllClasses()
                  .BindDefaultInterface();
             });
-
+            
             kernel.Bind(typeof(DbContext), typeof(MsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
+
             kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
-            kernel.Bind<ISaveContext>().To<SaveContext>();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+
             kernel.Bind<IMapper>().ToMethod(x => Mapper.Instance).InSingletonScope();
         }
     }

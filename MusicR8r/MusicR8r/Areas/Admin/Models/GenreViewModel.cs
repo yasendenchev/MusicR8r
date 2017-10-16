@@ -14,8 +14,9 @@ namespace MusicR8r.Areas.Admin.Models
     {
         public string Id { get; set; }
 
-        [RegularExpression("[a-zA-Z]{3,15}", ErrorMessage = "Genre name should contain only letters")]
-        [Required(ErrorMessage = "Name is required!")]
+        [RegularExpression("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*${3,15}", ErrorMessage = "The name can contain only letters, digits and whitespaces")]
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         public int SongsCount { get; set; }

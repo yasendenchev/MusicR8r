@@ -27,3 +27,7 @@ textarea {
     color: #e80c4d;
     font-weight: bold;
 }
+
+.btn > a {
+    color:white;
+}

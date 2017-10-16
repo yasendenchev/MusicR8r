@@ -64,7 +64,6 @@
     <Compile Include="GenreService.cs" />
     <Compile Include="Contracts\IArtistService.cs" />
     <Compile Include="Contracts\ISongService.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AlbumService.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />

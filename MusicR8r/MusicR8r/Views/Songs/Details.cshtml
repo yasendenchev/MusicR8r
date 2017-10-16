@@ -1,0 +1,73 @@
+﻿@model MusicR8r.Models.SongViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+
+        <dd>
+            @if(Model.Seconds < 10)
+            {
+            @String.Format("{0}:0{1}", Model.Minutes, Model.Seconds)
+            }
+            else{ 
+            @String.Format("{0}:{1}", Model.Minutes, Model.Seconds)
+            }
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Seconds)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Seconds)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Artist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Artist)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Album)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Album)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    <button class="btn btn-info">@Html.ActionLink("Back to List", "All")</button>
+</p>

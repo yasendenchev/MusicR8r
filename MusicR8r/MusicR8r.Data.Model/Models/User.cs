@@ -16,12 +16,12 @@ namespace MusicR8r.Data.Model.Models
     {
         public User()
         {
-            this.Albums = new HashSet<Album>();
         }
 
         public User(string username)
         {
             this.UserName = username;
+            this.Id = Guid.NewGuid().ToString();
         }
 
         public User(string email, string username, string firstName, string lastName)
@@ -52,8 +52,6 @@ namespace MusicR8r.Data.Model.Models
         public string Phone { get; set; }
 
         public string Bio { get; set; }
-
-        public virtual ICollection<Album> Albums { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {

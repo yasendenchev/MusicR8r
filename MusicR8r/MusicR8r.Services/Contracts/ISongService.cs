@@ -9,8 +9,6 @@ namespace MusicR8r.Services.Contracts
     {
           IQueryable<Song> GetAll();
 
-          IQueryable<Song> GetAllAndDeleted();
-
           void AddSong(string name, int duration, Guid genreId, Guid albumId);
 
           Song GetById(Guid songId);

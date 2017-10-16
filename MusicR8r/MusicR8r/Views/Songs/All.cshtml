@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MusicR8r.Models.SongViewModel>
+@using Kendo.Mvc.UI;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        a {
+            color: white;
+        }
+
+            a:hover {
+                color: white;
+            }
+
+        button > a:hover {
+            text-decoration: none;
+        }
+
+        button > a {
+            font-size: x-large
+        }
+    </style>
+</head>
+<body>
+    <button type="button" class="btn btn-success">@Html.ActionLink("Add Song", "Create")</button>
+
+
+    @(Html.Kendo().Grid(Model)
+                .Name("Grid")
+                .Columns(columns =>
+                {
+                columns.Bound(song => song.Name).Title("Name").Width("25%");
+                columns.Bound(song => song.Genre).Title("Genre").Width("20%");
+                columns.Template(@<text>Details</text>)
+                    .ClientTemplate(@Html.ActionLink("Details", "Details", "Songs", new { ID = "#=Id#" }, new { @class = "k-button" }).ToHtmlString()).Width("10%");
+
+                })
+                .Pageable()
+                .Sortable()
+                .HtmlAttributes(new { style = "height:70%;" })
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .PageSize(20)
+                    .Read(read => read.Action("ListSongs", "Songs", new { albumId = ViewContext.RouteData.Values["albumId"] }))
+                 )
+    )
+</body>
+</html>

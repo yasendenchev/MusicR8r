@@ -1,7 +1,7 @@
 ﻿using Moq;
 using MusicR8r.Data.Model.Models;
 using MusicR8r.Data.Repositories;
-using MusicR8r.Data.SaveContext;
+using MusicR8r.Data.UnitOfWork;
 using MusicR8r.Services;
 using MusicR8r.Services.Providers;
 using NUnit.Framework;
@@ -20,9 +20,9 @@ namespace Services.Tests.GenreServiceTest
         public void ShouldCallGenreRepositoryGetById_WhenInvoked()
         {
             var repositoryMock = new Mock<IEfRepository<Genre>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var datetimeMock = new Mock<IDateTimeProvider>();
-            var service = new GenreService(repositoryMock.Object, saveContextMock.Object , datetimeMock.Object);
+            var service = new GenreService(repositoryMock.Object, unitOfWorkMock.Object , datetimeMock.Object);
             var guid = new Guid("05fababb-f897-49ef-b42a-4943fcc38148");
 
             service.DeleteById(guid);
@@ -34,9 +34,9 @@ namespace Services.Tests.GenreServiceTest
         public void ShouldCallDateTimeProviderNow_WhenInvoked()
         {
             var repositoryMock = new Mock<IEfRepository<Genre>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var datetimeMock = new Mock<IDateTimeProvider>();
-            var service = new GenreService(repositoryMock.Object, saveContextMock.Object, datetimeMock.Object);
+            var service = new GenreService(repositoryMock.Object, unitOfWorkMock.Object, datetimeMock.Object);
             var guid = new Guid("05fababb-f897-49ef-b42a-4943fcc38148");
 
             service.DeleteById(guid);
@@ -48,9 +48,9 @@ namespace Services.Tests.GenreServiceTest
         public void ShouldSetGenreIsDeletedToTrue_WhenGenreExists()
         {
             var repositoryMock = new Mock<IEfRepository<Genre>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var datetimeMock = new Mock<IDateTimeProvider>();
-            var service = new GenreService(repositoryMock.Object, saveContextMock.Object, datetimeMock.Object);
+            var service = new GenreService(repositoryMock.Object, unitOfWorkMock.Object, datetimeMock.Object);
             var genre = new Genre("Rock");
             var guid = new Guid("05fababb-f897-49ef-b42a-4943fcc38148");
             var sampleDateTime = new DateTime(2017, 10, 22);
@@ -68,9 +68,9 @@ namespace Services.Tests.GenreServiceTest
         public void ShouldSetGenreDeletedOnToCurrentDate_WhenGenreExists()
         {
             var repositoryMock = new Mock<IEfRepository<Genre>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var datetimeMock = new Mock<IDateTimeProvider>();
-            var service = new GenreService(repositoryMock.Object, saveContextMock.Object, datetimeMock.Object);
+            var service = new GenreService(repositoryMock.Object, unitOfWorkMock.Object, datetimeMock.Object);
             var genre = new Genre("Rock");
             var guid = new Guid("05fababb-f897-49ef-b42a-4943fcc38148");
             var currentDate = new DateTime(2017, 10, 22);
@@ -88,9 +88,9 @@ namespace Services.Tests.GenreServiceTest
         public void ShouldCallRepositoryUpdate_WhenInvoked()
         {
             var repositoryMock = new Mock<IEfRepository<Genre>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var datetimeMock = new Mock<IDateTimeProvider>();
-            var service = new GenreService(repositoryMock.Object, saveContextMock.Object, datetimeMock.Object);
+            var service = new GenreService(repositoryMock.Object, unitOfWorkMock.Object, datetimeMock.Object);
             var genre = new Genre("Rock");
             var guid = new Guid("05fababb-f897-49ef-b42a-4943fcc38148");
             var sampleDateTime = new DateTime(2017, 10, 22);
@@ -105,12 +105,12 @@ namespace Services.Tests.GenreServiceTest
         }
 
         [Test]
-        public void ShouldCallSaveContextCommit_WhenInvoked()
+        public void ShouldCallUnitOfWorkCommit_WhenInvoked()
         {
             var repositoryMock = new Mock<IEfRepository<Genre>>();
-            var saveContextMock = new Mock<ISaveContext>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var datetimeMock = new Mock<IDateTimeProvider>();
-            var service = new GenreService(repositoryMock.Object, saveContextMock.Object, datetimeMock.Object);
+            var service = new GenreService(repositoryMock.Object, unitOfWorkMock.Object, datetimeMock.Object);
             var genre = new Genre("Rock");
             var guid = new Guid("05fababb-f897-49ef-b42a-4943fcc38148");
             var sampleDateTime = new DateTime(2017, 10, 22);
@@ -121,7 +121,7 @@ namespace Services.Tests.GenreServiceTest
 
             service.DeleteById(guid);
 
-            saveContextMock.Verify(x => x.Commit(), Times.Once());
+            unitOfWorkMock.Verify(x => x.Commit(), Times.Once());
         }
     }
 }

@@ -22,6 +22,16 @@ namespace MusicR8r.Areas.Admin.Controllers
 
         public AlbumsController(IAlbumService albumService, IMapper mapper)
         {
+            if(albumService == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (mapper == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             this.albumService = albumService;
             this.mapper = mapper;
         }
@@ -83,28 +93,6 @@ namespace MusicR8r.Areas.Admin.Controllers
 
             return View(albumViewModel);
         }
-
-        //public ActionResult All(Guid? artistId)
-        //{
-        //    if (artistId == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-
-        //    IQueryable<Album> albums = this.albumService.GetByArtist((Guid)artistId);
-
-
-        //    if (albums == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    var albumViewModel = albums.ProjectTo<AlbumViewModel>().AsEnumerable();
-
-        //    return View(albumViewModel);
-
-
-        //}
 
         // GET: Admin/Album/Edit/5
 
@@ -169,14 +157,5 @@ namespace MusicR8r.Areas.Admin.Controllers
             this.albumService.DeleteById(id);
             return RedirectToAction("All");
         }
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - MusicR8r</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     
@@ -34,9 +34,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", new { controller = "Home", area = "" })</li>
-                    <li>@Html.ActionLink("About", "About", new { controller = "Home", area = "" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", new { controller = "Home", area = "" })</li>
-                    <li>@Html.ActionLink("Albums", "All", new { controller = "Albums", area = "" })</li>
                     @if (Request.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Profile Details", "Details", new { controller = "Profile", area = "" })</li>
@@ -47,8 +44,8 @@
                         <li class="dropdown hover">
                             <a href="#" class="dropdown-hover" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Admin <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Genres", "Index", "Genres", new { area = "Admin" }, new { })</li>
-                                <li>@Html.ActionLink("Artists", "Index", "Artists", new { area = "Admin" }, new { })</li>
+                                <li>@Html.ActionLink("Genres", "All", "Genres", new { area = "Admin" }, new { })</li>
+                                <li>@Html.ActionLink("Artists", "All", "Artists", new { area = "Admin" }, new { })</li>
                             </ul>
                         </li>
                     }
@@ -60,9 +57,6 @@
     <div class="container body-content" >
         @RenderBody()   
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
     

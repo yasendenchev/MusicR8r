@@ -12,8 +12,6 @@ namespace MusicR8r.Services.Contracts
         void AddGenre(string name);
 
         IQueryable<Genre> GetAll();
-
-        //IQueryable<Genre> GetAllAndDeleted();
         
         Genre GetById(Guid genreId);
 

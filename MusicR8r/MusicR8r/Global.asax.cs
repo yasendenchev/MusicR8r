@@ -1,4 +1,5 @@
 ﻿using MusicR8r.App_Start;
+using MusicR8r.Controllers;
 using MusicR8r.Data;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Web.Routing;
 
 namespace MusicR8r
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {

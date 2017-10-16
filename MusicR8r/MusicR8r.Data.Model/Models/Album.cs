@@ -20,7 +20,6 @@ namespace MusicR8r.Data.Model.Models
             this.Users = new HashSet<User>();
         }
 
-
         public string Name { get; set; }
 
         public int Year { get; set; }

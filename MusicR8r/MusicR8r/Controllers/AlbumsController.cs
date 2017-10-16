@@ -2,7 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
-using MusicR8r.Areas.Admin.Models;
+using MusicR8r.Models;
 using MusicR8r.Data.Model.Models;
 using MusicR8r.Services.Providers;
 using System;
@@ -21,6 +21,14 @@ namespace MusicR8r.Controllers
 
         public AlbumsController(IAlbumService albumService, IMapper mapper)
         {
+            if(albumService == null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (mapper == null)
+            {
+                throw new ArgumentNullException();
+            }
             this.albumService = albumService;
             this.mapper = mapper;
         }
@@ -50,6 +58,7 @@ namespace MusicR8r.Controllers
             }
 
             Album albumModel = this.albumService.GetById((Guid)id);
+            
 
             if (albumModel == null)
             {

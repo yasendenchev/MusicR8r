@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MusicR8r.Models;
-using MusicR8r.Models.Home;
 using MusicR8r.Services;
 using MusicR8r.Services.Contracts;
 using System;
@@ -25,21 +24,7 @@ namespace MusicR8r.Controllers
 
         public ActionResult Index()
         {
-
-            //var genres = this.genreService
-            //.GetAllAndDeleted();
-
-            //var model = genres.ProjectTo<GenreViewModel>().ToList();
-           
-            //var genre = this.service.GetById(new Guid("CEFECC0D-E894-482A-B7F6-1E1FD31D818A"));
-
-
-            var viewModel = new HomeViewModel()
-            {
-                //Genres = models
-            };
-
-            return View(viewModel);
+            return View();
         }
 
         public ActionResult About()

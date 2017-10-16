@@ -10,18 +10,19 @@ using System.Web.Mvc;
 
 namespace MusicR8r.Models
 {
+    
+
     public class AlbumViewModel : IMapFrom<Album>, ICustomMappings
     {
         public Guid Id { get; set; }
 
-        [RegularExpression("[a-zA0]{3,15}", ErrorMessage = "Album name should contain only letters")]
-        [Required(ErrorMessage = "Name is required!")]
-        [AllowHtml]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Year is required!")]
+        [Display(Name = "Year")]
         public int Year { get; set; }
 
+        [Display(Name = "Artist")]
         public string ArtistName { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)

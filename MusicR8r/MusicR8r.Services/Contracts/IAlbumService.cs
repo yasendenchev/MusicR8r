@@ -1,6 +1,7 @@
 ﻿using MusicR8r.Data.Model.Models;
 using MusicR8r.Services.Contracts;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MusicR8r.Services.Providers
@@ -12,6 +13,8 @@ namespace MusicR8r.Services.Providers
         void AddAlbum(string name, int year, Guid artistId);
 
         Album GetById(Guid albumId);
+
+        ICollection<Song> GetSongs(Guid albumId);
 
         void Update(Guid albumId, string albumName, int albumYear);
 

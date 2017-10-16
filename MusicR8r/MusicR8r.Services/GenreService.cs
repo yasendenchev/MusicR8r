@@ -7,7 +7,7 @@ using MusicR8r.Data;
 using MusicR8r.Data.Model;
 using MusicR8r.Data.Model.Models;
 using MusicR8r.Data.Repositories;
-using MusicR8r.Data.SaveContext;
+using MusicR8r.Data.UnitOfWork;
 using MusicR8r.Services.Contracts;
 using MusicR8r.Services.Providers;
 using System.Data.Entity;
@@ -18,20 +18,20 @@ namespace MusicR8r.Services
     {
         private const string argNullMessage = "cannot be null.";
         private readonly IEfRepository<Genre> genreRepository;
-        private readonly ISaveContext saveContext;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IDateTimeProvider dateTimeProvider;
 
 
-        public GenreService(IEfRepository<Genre> genreRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider)
+        public GenreService(IEfRepository<Genre> genreRepository, IUnitOfWork unitOfWork, IDateTimeProvider dateTimeProvider)
         {
             if (genreRepository == null)
             {
                 throw new ArgumentNullException(String.Format("GenreRepository" + argNullMessage));
             }
 
-            if (saveContext == null)
+            if (unitOfWork == null)
             {
-                throw new ArgumentNullException(String.Format("SaveContext" + argNullMessage));
+                throw new ArgumentNullException(String.Format("UnitOfWork" + argNullMessage));
             }
 
             if (dateTimeProvider == null)
@@ -40,7 +40,7 @@ namespace MusicR8r.Services
             }
 
             this.genreRepository = genreRepository;
-            this.saveContext = saveContext;
+            this.unitOfWork = unitOfWork;
             this.dateTimeProvider = dateTimeProvider;
         }
 
@@ -60,7 +60,7 @@ namespace MusicR8r.Services
         {
             var genre = new Genre(name);
             this.genreRepository.Add(genre);
-            this.saveContext.Commit();
+            this.unitOfWork.Commit();
         }
 
         public Genre GetById(Guid genreId)
@@ -79,7 +79,7 @@ namespace MusicR8r.Services
                 genre.DeletedOn = this.dateTimeProvider.Now();
 
                 this.genreRepository.Update(genre);
-                this.saveContext.Commit();
+                this.unitOfWork.Commit();
             }
         }
     }

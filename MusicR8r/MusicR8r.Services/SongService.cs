@@ -1,6 +1,6 @@
 ﻿using MusicR8r.Data.Model.Models;
 using MusicR8r.Data.Repositories;
-using MusicR8r.Data.SaveContext;
+using MusicR8r.Data.UnitOfWork;
 using MusicR8r.Services.Contracts;
 using MusicR8r.Services.Providers;
 using System;
@@ -18,20 +18,35 @@ namespace MusicR8r.Services
         private readonly IEfRepository<Album> albumRepository;
         private readonly IEfRepository<Artist> artistRepository;
         private readonly IEfRepository<Genre> genreRepository;
-        private readonly ISaveContext saveContext;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IDateTimeProvider dateTimeProvider;
 
 
-        public SongService(IEfRepository<Song> songRepository, IEfRepository<Album> albumRepository, IEfRepository<Genre> genreRepository, IEfRepository<Artist> artistRepository, ISaveContext saveContext, IDateTimeProvider dateTimeProvider)
+        public SongService(IEfRepository<Song> songRepository, IEfRepository<Album> albumRepository, IEfRepository<Genre> genreRepository, IEfRepository<Artist> artistRepository, IUnitOfWork unitOfWork, IDateTimeProvider dateTimeProvider)
         {
             if (songRepository == null)
             {
                 throw new ArgumentNullException(String.Format("SongRepository" + argNullMessage));
             }
 
-            if (saveContext == null)
+            if (albumRepository == null)
             {
-                throw new ArgumentNullException(String.Format("SaveContext" + argNullMessage));
+                throw new ArgumentNullException(String.Format("SongRepository" + argNullMessage));
+            }
+
+            if (genreRepository == null)
+            {
+                throw new ArgumentNullException(String.Format("SongRepository" + argNullMessage));
+            }
+
+            if (artistRepository == null)
+            {
+                throw new ArgumentNullException(String.Format("SongRepository" + argNullMessage));
+            }
+
+            if (unitOfWork == null)
+            {
+                throw new ArgumentNullException(String.Format("UnitOfWork" + argNullMessage));
             }
 
             if (dateTimeProvider == null)
@@ -43,19 +58,13 @@ namespace MusicR8r.Services
             this.songRepository = songRepository;
             this.albumRepository = albumRepository;
             this.artistRepository = artistRepository;
-            this.saveContext = saveContext;
+            this.unitOfWork = unitOfWork;
             this.dateTimeProvider = dateTimeProvider;
         }
 
         public IQueryable<Song> GetAll()
         {
             IQueryable<Song> songs = this.songRepository.All;
-            return songs;
-        }
-
-        public IQueryable<Song> GetAllAndDeleted()
-        {
-            IQueryable<Song> songs = this.songRepository.AllAndDeleted;
             return songs;
         }
 
@@ -66,20 +75,21 @@ namespace MusicR8r.Services
             var artist = album.Artist;
             var song = new Song(name, duration, artist, album, genre);
             this.songRepository.Add(song);
-            this.saveContext.Commit();
+            this.unitOfWork.Commit();
         }
 
         public Song GetById(Guid songId)
         {
-            return this.songRepository.GetById(songId);
+            var song = this.songRepository.GetById(songId);
+            return song;
         }
 
         public IQueryable<Song> GetByAlbum(Guid albumId)
         {
-            return this.songRepository.All.Where(song => song.Album.Id.Equals(albumId));
+            var songs = this.songRepository.All.Where(song => song.Album.Id.Equals(albumId));
+            return songs;
         }
-
-        //Not sure if it will be put to use
+        
         public void Update(Guid songId, Guid genreId, string songName, int songDuration)
         {
             var genre = this.genreRepository.GetById(genreId);
@@ -89,7 +99,7 @@ namespace MusicR8r.Services
             song.Genre = genre;
 
             this.songRepository.Update(song);
-            this.saveContext.Commit();
+            this.unitOfWork.Commit();
         }
 
         public void DeleteById(Guid songId)
@@ -103,7 +113,7 @@ namespace MusicR8r.Services
                 song.DeletedOn = this.dateTimeProvider.Now();
 
                 this.songRepository.Update(song);
-                this.saveContext.Commit();
+                this.unitOfWork.Commit();
             }
         }
     }
