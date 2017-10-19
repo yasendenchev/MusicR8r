@@ -1,126 +1,34 @@
 # MusicR8r
 
-MusicR8r is a website where people can write reviews about music albums/singles.
+А project for the ASP.NET MV course in Telerik Academy
 
-## Functionality
-
-- Only the admin can add new albums/singles.
-- Regular users can add albums/singles to their "bought" or "wish" list and write reviews
-- Search functionality
-
-## Tasks
-
-### Caching
-### Fix Artist, Albums, Songs Delete Services!!!!
-### Remove business logic from all controlers!!!!
-### Fix add Services on every model!!!!
-### Implement Albums Controller!!!! - done
-### Implement Public Songs Controller!!!
-### Implement Chat
-### Decouple Auth Service
-
-### Remove user collection functionality
+## Summary
+A web app that gives its users the possibility to search for music albums and.
 
 
+### Public part
+It is visible to everyone who visits the app. Non-logged users can search albums.
+
+### Private part
+Registered users can chat with each other(not yet implemented) and edit their profiles. 
+
+### Administration area
+Administrators can add/delete artists,albums and/or songs.
 
 
+## Technologies/frameworks used
 
-### Continuous integration - Done
+- ASP.NET MVC 5
+- Razor Template Engine
+- Entity Framework
+- MS SQL Server
+- Bootstrap
+- Ninject as IoC container
+- KendoUI for pagination and sorting
+- NUnit and Moq for unit testing
 
-### Unit testing
-#### Services
-##### - Album
-##### - Artist
-##### - Song
-##### - Genre
-##### - User
 
-#### Services
-##### - Album
-##### - Artist
-##### - Song
-##### - Genre
-##### - User
+## Check out the app [here](http://musicr8r.azurewebsites.net/)
 
-#### Controllers
-##### Private
-###### - Album
-###### - Artist
-###### - Song
-###### - Genre
-###### - User
 
-##### Public
-###### - Album
-###### - Artist
-###### - Song
-###### - Genre
-###### - User
-
-### Submit AJAX form / or SignalR
-#### Implement chat
-
-### Sections and partial views
-
-### Security holes prevention
-#### Add AntiForgeryTokenAttribute!!!
-
-### Error handling and Data validation
-#### Server-side
-##### - DataAnnotations
-#### Client-side
-
-### Admin area - Done
-
-### Files check and eventually refactor
-
-1) genres
-2) albums
-3) artists
-4) songs
-#### Genres
-1. pagination and sorting
-2. add functionality (view)
-3. delete functionality (view)
-4. create view
-5. create controller
-#### Albums
-1. services:
-- add
-- update
-- delete (by id)
-- get all
-- get by id
-- search (by name, by artist, by genre)
-2. listing
-3. pagination and sorting
-4. add functionality (view)
-5. delete functionality (view)
-6. update functionality (view)
-7. create viewModel
-8. create controller
-#### Artists
-1. services:
-- add
-- update
-- delete (by id)
-- get all
-- get by id
-2. add functionality (view)
-3. delete functionality (view)
-4. update functionality (view)
-5. create viewModel
-6. create controller
-#### Songs
-1.services:
-- add
-- update
-- delete (by id)
-- get by album
-- get by id
-2. add functionality (view)
-3. delete functionality (view)
-4. update functionality (view)
-5. create viewModel
-6. create controller
 
