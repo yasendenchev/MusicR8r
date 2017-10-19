@@ -10,8 +10,6 @@ using System.Web.Mvc;
 
 namespace MusicR8r.Models
 {
-    
-
     public class AlbumViewModel : IMapFrom<Album>, ICustomMappings
     {
         public Guid Id { get; set; }

@@ -52,8 +52,6 @@ namespace MusicR8r.Data
                         raise = new InvalidOperationException(message, raise);
                     }
                 }
-
-
             }
 
             return -1;

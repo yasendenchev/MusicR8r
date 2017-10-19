@@ -34,6 +34,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", new { controller = "Home", area = "" })</li>
+                    <li>@Html.ActionLink("Albums", "All", new { controller = "Albums", area = "" })</li>
                     @if (Request.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Profile Details", "Details", new { controller = "Profile", area = "" })</li>

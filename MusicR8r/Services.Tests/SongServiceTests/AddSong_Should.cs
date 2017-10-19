@@ -65,7 +65,6 @@ namespace Services.Tests
         [Test]
         public void CallGenreRepositoryGetById_WhenInvoked()
         {
-            
             genreRepositoryMock.Verify(x => x.GetById(genreId), Times.Once);
         }
 
@@ -78,13 +77,12 @@ namespace Services.Tests
         [Test]
         public void CallSongRepositoryAdd_WhenInvoked()
         {
-
             var song = new Song();
             song.Name = name;
             song.Duration = duration;
             song.Artist = artist;
             song.Album = album;
-            songRepositoryMock.Verify(x => x.Add(It.IsAny<Song>()), Times.Once);
+            songRepositoryMock.Verify(x => x.Add(song), Times.Once);
         }
 
         [Test]

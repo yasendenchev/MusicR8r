@@ -18,11 +18,11 @@ namespace MusicR8r
                 new { controller = "Songs", action = "All", id = UrlParameter.Optional },
                 namespaces: new string[] { "MusicR8r.Controllers" }
                 );
-            routes.MapRoute(
-                name: "Profile",
-                url: "Profile/Details",
-                defaults: new { controller = "Profile", action = "Details" }
-                );
+            //routes.MapRoute(
+            //    name: "Profile",
+            //    url: "Profile/Details",
+            //    defaults: new { controller = "Profile", action = "Details" }
+            //    );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
